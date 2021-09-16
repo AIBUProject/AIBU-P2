@@ -21,7 +21,7 @@ public class RoomController : MonoBehaviour
     public List<Room> loadedRooms = new List<Room>();
     public GameObject collectible;
     bool isLoadingRoom = false;
-    bool spawnedEndRoom = false;
+    public bool spawnedEndRoom = false;
     public bool updatedRooms = false;
     // Start is called before the first frame update
 

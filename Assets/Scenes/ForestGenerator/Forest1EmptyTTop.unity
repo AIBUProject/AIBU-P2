@@ -1220,6 +1220,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5374209026055966329, guid: 3d98ac4ef6cbdeb4cb587452940f8b38, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.3915384
+      objectReference: {fileID: 0}
+    - target: {fileID: 5374209026055966329, guid: 3d98ac4ef6cbdeb4cb587452940f8b38, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -1316,7 +1320,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 18.476841, y: 9.54707}
+  m_Size: {x: 20, y: 11}
   m_EdgeRadius: 0
 --- !u!114 &2037135112
 MonoBehaviour:
@@ -1330,8 +1334,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9631d93341358d3498cd4e5a85fa09b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Width: 20
-  Height: 11
+  Width: 21
+  Height: 12
   X: 0
   Y: 0
   leftDoor: {fileID: 0}

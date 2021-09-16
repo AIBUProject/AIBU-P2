@@ -59,12 +59,12 @@ public class Room : MonoBehaviour
     {
         if(name.Contains("End") && !updatedDoors)
         {
-            RemoveUnconnectedDoors();
+            RemoveConnectedDoors();
             updatedDoors = true;
         }
     }
 
-    public void RemoveUnconnectedDoors()
+    public void RemoveConnectedDoors()
     {
         foreach(Door door in doors)
         {

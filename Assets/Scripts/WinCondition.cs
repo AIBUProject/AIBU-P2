@@ -16,7 +16,6 @@ public class WinCondition : MonoBehaviour
     }
     public void addAmountToWin()
     {
-
         amountToWin++;
     }
 

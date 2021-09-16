@@ -19,24 +19,15 @@ public class RoomController : MonoBehaviour
     Room currentRoom;
     Queue<RoomInfo> loadRoomQueue = new Queue<RoomInfo>();
     public List<Room> loadedRooms = new List<Room>();
-
+    public GameObject collectible;
     bool isLoadingRoom = false;
-    bool spawnedBossRoom = false;
-    bool updatedRooms = false;
+    bool spawnedEndRoom = false;
+    public bool updatedRooms = false;
     // Start is called before the first frame update
 
     void Awake()
     {
         instance = this;   
-    }
-
-    void Start()
-    {
-        // LoadRoom("Start", 0, 0);
-        // LoadRoom("Empty", 1, 0);
-        // LoadRoom("Empty", -1, 0);
-        // LoadRoom("Empty", 0, 1);
-        // LoadRoom("Empty", 0, -1);
     }
 
     void Update()
@@ -50,38 +41,150 @@ public class RoomController : MonoBehaviour
             return;
         if(loadRoomQueue.Count == 0)
         {
-            if(!spawnedBossRoom)
-                StartCoroutine(SpawnBossRoom());
-            else if(spawnedBossRoom && !updatedRooms)
+            
+            if(!updatedRooms && !spawnedEndRoom)
             {
                 foreach(Room room in loadedRooms)
-                    room.RemoveUnconnectedDoors();
+                {
+                    room.RemoveConnectedDoors();
+                    string roomName = FindReplacementRoomName(room);
+                    StartCoroutine(ChangeRoom(room, roomName));
+                }
                 updatedRooms = true;
             }
+            else if(updatedRooms && !spawnedEndRoom)
+            {
+                StartCoroutine(SpawnEndRoom());
+            }   
             return;
         }
             
-        
         currentLoadRoomData = loadRoomQueue.Dequeue();
         isLoadingRoom = true;
 
         StartCoroutine(LoadRoomRoutine(currentLoadRoomData));
     }
 
-    IEnumerator SpawnBossRoom()
+    string FindReplacementRoomName(Room room)
     {
-        spawnedBossRoom = true;
-        yield return new WaitForSeconds(0.5f);
-        if(loadRoomQueue.Count == 0)
+        bool hasTop = false, hasBottom = false, hasLeft = false, hasRight = false;
+        foreach(Door door in room.doors)
         {
-            Room bossRoom = loadedRooms[loadedRooms.Count - 1];
-            Room tempRoom = new Room(bossRoom.X, bossRoom.Y);
-            Destroy(bossRoom.gameObject);
-            var roomToRemove = loadedRooms.Single(r => r.X == tempRoom.X && r.Y == tempRoom.Y);
-            loadedRooms.Remove(roomToRemove);
-            LoadRoom("End", tempRoom.X, tempRoom.Y);
+            switch(door.doorType)
+            {
+                case Door.DoorType.top:
+                    if(door.gameObject.activeSelf)
+                        hasTop = true;
+                    break;
+                case Door.DoorType.bottom:
+                    if(door.gameObject.activeSelf)
+                        hasBottom = true;
+                    break;
+                case Door.DoorType.left:
+                    if(door.gameObject.activeSelf)
+                        hasLeft = true;
+                    break;
+                case Door.DoorType.right:
+                    if(door.gameObject.activeSelf)
+                        hasRight = true;
+                    break;
+            }
         }
+        return DetermineRoomName(hasTop, hasBottom, hasLeft, hasRight);
+    }
+    string DetermineRoomName(bool hasTop, bool hasBottom, bool hasLeft, bool hasRight)
+    {
+        string roomName = "Empty";
+        if(!hasTop && !hasBottom && !hasLeft && !hasRight)
+        {
+            roomName +="Cross";
+        }
+        else if(hasTop && !hasBottom && !hasLeft && !hasRight)
+        {
+            roomName += "TTop";
+        }
+        else if(!hasTop && hasBottom && !hasLeft && !hasRight)
+        {
+            roomName += "TBottom";
+        }
+        else if(!hasTop && !hasBottom && hasLeft && !hasRight)
+        {
+            roomName += "TLeft";
+        }
+        else if(!hasTop && !hasBottom && !hasLeft && hasRight)
+        {
+            roomName += "TRight";
+        }
+        else if(!hasTop && !hasBottom && hasLeft && hasRight)
+        {
+            roomName += "TopToBottom";
+        }
+        else if(hasTop && hasBottom && !hasLeft && !hasRight)
+        {
+            roomName += "LeftToRight";
+        }
+        else if(!hasTop && hasBottom && !hasLeft && hasRight)
+        {
+            roomName += "TopToLeft";
+        }
+        else if(!hasTop && hasBottom && hasLeft && !hasRight)
+        {
+            roomName += "TopToRight";
+        }
+        else if(hasTop && !hasBottom && !hasLeft && hasRight)
+        {
+            roomName += "BottomToLeft";
+        }
+        else if(hasTop && !hasBottom && hasLeft && !hasRight)
+        {
+            roomName += "BottomToRight";
+        }
+        else if(hasTop && hasBottom && !hasLeft && hasRight)
+        {
+            roomName += "DeadEndLeft";
+        }
+        else if(hasTop && hasBottom && hasLeft && !hasRight)
+        {
+            roomName += "DeadEndRight";
+        }
+        else if(!hasTop && hasBottom && hasLeft && hasRight)
+        {
+            roomName += "DeadEndTop";
+        }
+        else if(hasTop && !hasBottom && hasLeft && hasRight)
+        {
+            roomName += "DeadEndBottom";
+        }
+        return roomName;
+    }
 
+    IEnumerator ChangeRoom(Room room, string roomName)
+    {
+        yield return new WaitForSeconds(0.1f);
+        Room tempRoom = new Room(room.X, room.Y);
+        Destroy(room.gameObject);
+        var roomToRemove = loadedRooms.Single(r => r.X == tempRoom.X && r.Y == tempRoom.Y);
+        loadedRooms.Remove(roomToRemove);
+        LoadRoom(roomName, tempRoom.X, tempRoom.Y);
+        PopulateRoom(room);
+    }
+
+    IEnumerator SpawnEndRoom()
+    {
+        spawnedEndRoom = true;
+        yield return new WaitForSeconds(0.25f);
+        Room endRoom = loadedRooms[loadedRooms.Count - 1];
+        StartCoroutine(ChangeRoom(endRoom, "End"));
+    }
+
+    void PopulateRoom(Room room)
+    {
+        if(!room.name.Contains("End"))
+        {
+            int randomInt = Random.Range(0,100);
+            if(randomInt < 25)
+                Instantiate(collectible, room.GetRoomCentre(), Quaternion.identity);
+        }
     }
 
     public void LoadRoom(string name, int x, int y)

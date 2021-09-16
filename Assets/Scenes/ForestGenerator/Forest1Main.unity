@@ -220,6 +220,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadedRooms: []
+  collectible: {fileID: 5108571983118313348, guid: 1d23353312032664cab9336e907d50ae, type: 3}
+  updatedRooms: 0
 --- !u!4 &621540729
 Transform:
   m_ObjectHideFlags: 0

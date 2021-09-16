@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/ForestGenerator/Forest1Start.unity
     guid: eb571624d978d87428de7d70191b670b
   - enabled: 1
-    path: Assets/Scenes/ForestGenerator/Forest1Empty.unity
+    path: Assets/Scenes/ForestGenerator/Forest1Default.unity
     guid: 13d3d21895c90ee4a9c2041fbbc09d88
   - enabled: 1
     path: Assets/Scenes/ForestGenerator/Forest1End.unity

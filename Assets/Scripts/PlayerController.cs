@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
-    public Transform transform;
+    new public Transform transform;
     private int collectedObjects = 0;
 
     private bool goUp = false;

@@ -6,6 +6,9 @@ public class PlayerController : MonoBehaviour
 {
 
     public Transform transform;
+    public GameObject pathfinder;
+    public GameObject enemy;
+
     private int collectedObjects = 0;
 
     private bool goUp = false;
@@ -29,7 +32,16 @@ public class PlayerController : MonoBehaviour
     }
     void Update() {
         collect();
-        movementInput();
+        movementInput(); 
+
+        if (Input.GetKeyDown(KeyCode.F)){
+            Instantiate(pathfinder, new Vector2(0,0), Quaternion.identity);
+        
+        }
+        if (Input.GetKeyDown(KeyCode.G)) { 
+        Instantiate(enemy, new Vector2(0, 0), Quaternion.identity);
+        }
+
     }
    
     private void movementInput() {

@@ -22,7 +22,7 @@ public class RoomController : MonoBehaviour
 
     bool isLoadingRoom = false;
     bool spawnedBossRoom = false;
-    bool updatedRooms = false;
+  public bool updatedRooms = false;
     // Start is called before the first frame update
 
     void Awake()

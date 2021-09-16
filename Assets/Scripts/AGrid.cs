@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class AGrid : MonoBehaviour
 {
-    RoomController roomController;
-    // Start is called before the first frame update
-    void Start()
-    {
-   // GameObject.Find("RoomController").GetComponentInChildren<RoomController>().;
-    }
 
-    // Update is called once per frame
+    public GameObject pathfinder;
+    bool doOnce = false;
+
     void Update()
     {
+      if(GameObject.Find("RoomController").GetComponentInChildren<RoomController>().updatedRooms == true && doOnce == false){
+            Instantiate(pathfinder, new Vector2(0, 0), Quaternion.identity);
+            doOnce = true;
+
+        }
     }
 }

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1234169715542319672}
   - component: {fileID: 6185765474245048695}
   - component: {fileID: 5206823077263048978}
+  - component: {fileID: 6125411290068381799}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -47,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  target: {fileID: 929625555769051839, guid: 2e08bfab07b3c384892ef6d3a8a210c2, type: 3}
+  target: {fileID: 929625555769051839, guid: 8c5d145a03ac36348b33f29584a2a3af, type: 3}
 --- !u!114 &6185765474245048695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -91,10 +92,10 @@ MonoBehaviour:
   version: 2
   radius: 0.92
   height: 2
-  repathRate: 0.5
+  repathRate: 0.1
   canSearch: 1
   canMove: 1
-  maxSpeed: 3
+  maxSpeed: 5.5
   gravity: {x: 0, y: 0, z: 0}
   groundMask:
     serializedVersion: 2
@@ -103,7 +104,7 @@ MonoBehaviour:
   orientation: 1
   enableRotation: 0
   targetCompatibility: {fileID: 0}
-  maxAcceleration: 15
+  maxAcceleration: 100
   rotationSpeed: 360
   slowdownDistance: 0.6
   pickNextWaypointDist: 1.2
@@ -112,6 +113,18 @@ MonoBehaviour:
   slowWhenNotFacingTarget: 1
   whenCloseToDestination: 0
   constrainInsideGraph: 0
+--- !u!114 &6125411290068381799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3704349506801004488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ed1efd62b645b942a91fb67ef22b305, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &481004541392850457
 PrefabInstance:
   m_ObjectHideFlags: 0

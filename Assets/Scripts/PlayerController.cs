@@ -69,24 +69,49 @@ public class PlayerController : MonoBehaviour
 
         if (goUp)
         {
-            transform.position = new Vector2(transform.position.x, transform.position.y + 0.1f);
+            if (goLeft || goRight)
+            {
+                transform.position = new Vector2(transform.position.x, transform.position.y + 0.07f);
+            }
+            else {
+                transform.position = new Vector2(transform.position.x, transform.position.y + 0.1f);
+            }
+           
 
         }
         if (goLeft)
         {
-            transform.position = new Vector2(transform.position.x - 0.1f, transform.position.y);
-
+            if (goUp || goDown)
+            {
+                transform.position = new Vector2(transform.position.x - 0.07f, transform.position.y);
+            }
+            else
+            {
+                transform.position = new Vector2(transform.position.x - 0.1f, transform.position.y);
+            }
         }
 
         if (goRight)
         {
-            transform.position = new Vector2(transform.position.x + 0.1f, transform.position.y);
-
+            if (goUp || goDown)
+            {
+                transform.position = new Vector2(transform.position.x + 0.07f, transform.position.y);
+            }
+            else
+            {
+                transform.position = new Vector2(transform.position.x + 0.1f, transform.position.y);
+            }
         }
         if (goDown)
         {
-            transform.position = new Vector2(transform.position.x, transform.position.y - 0.1f);
-
+            if (goLeft || goRight)
+            {
+                transform.position = new Vector2(transform.position.x, transform.position.y - 0.07f);
+            }
+            else
+            {
+                transform.position = new Vector2(transform.position.x, transform.position.y - 0.1f);
+            }
         }
     }
 

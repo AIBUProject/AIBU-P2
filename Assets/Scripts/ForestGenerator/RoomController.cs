@@ -170,7 +170,7 @@ public class RoomController : MonoBehaviour
     IEnumerator SpawnEndRoom()
     {
         spawnedEndRoom = true;
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(3f);
         Room endRoom = FindLongDistanceRoom();
         StartCoroutine(ChangeRoom(endRoom, "End"));
         StartCoroutine(PopulateRooms());

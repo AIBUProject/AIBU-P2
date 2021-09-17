@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class WinCondition : MonoBehaviour
 {
+    GameObject[] collectibles;
+    void Start()
+    {
+        collectibles = GameObject.FindGameObjectsWithTag("Collectible");
+        amountToWin = collectibles.Length;
+    }
     private int amountToWin;
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -14,9 +20,5 @@ public class WinCondition : MonoBehaviour
         }
 
     }
-    public void addAmountToWin()
-    {
-        amountToWin++;
-    }
-
 }
+ 

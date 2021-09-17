@@ -33,7 +33,7 @@ public class EnemyHunt : MonoBehaviour
     }
     private bool huntCountdown(float seconds)
     {
-        Debug.Log(seconds);
+        //Debug.Log(seconds);
         huntTimer += Time.deltaTime;
 
         if (huntTimer >= seconds)

@@ -41,7 +41,6 @@ public class RoomController : MonoBehaviour
             return;
         if(loadRoomQueue.Count == 0)
         {
-            
             if(!updatedRooms && !spawnedEndRoom)
             {
                 foreach(Room room in loadedRooms)
@@ -166,24 +165,43 @@ public class RoomController : MonoBehaviour
         var roomToRemove = loadedRooms.Single(r => r.X == tempRoom.X && r.Y == tempRoom.Y);
         loadedRooms.Remove(roomToRemove);
         LoadRoom(roomName, tempRoom.X, tempRoom.Y);
-        PopulateRoom(room);
     }
 
     IEnumerator SpawnEndRoom()
     {
         spawnedEndRoom = true;
-        yield return new WaitForSeconds(0.25f);
-        Room endRoom = loadedRooms[loadedRooms.Count - 1];
+        yield return new WaitForSeconds(3f);
+        Room endRoom = FindLongDistanceRoom();
         StartCoroutine(ChangeRoom(endRoom, "End"));
+        StartCoroutine(PopulateRooms());
     }
 
-    void PopulateRoom(Room room)
+    Room FindLongDistanceRoom()
     {
-        if(!room.name.Contains("End"))
+        int maxDistance = 0, index = 0;
+        for(int i = 0; i < loadedRooms.Count-1; i++)
         {
-            int randomInt = Random.Range(0,100);
-            if(randomInt < 25)
-                Instantiate(collectible, room.GetRoomCentre(), Quaternion.identity);
+            int distance = Mathf.Abs(loadedRooms.ElementAt(i).X) + Mathf.Abs(loadedRooms.ElementAt(i).Y);
+            if(distance > maxDistance)
+            {
+                maxDistance = distance;
+                index = i;
+            }
+        }
+        return loadedRooms.ElementAt(index);
+    }
+
+    IEnumerator PopulateRooms()
+    {
+        yield return new WaitForSeconds(0.2F);
+        foreach(Room room in loadedRooms)
+        {
+            if(!(room.name.Contains("End") || (room.X == 0 && room.Y == 0)))
+            {
+                int randomInt = Random.Range(0,100);
+                if(randomInt < 25)
+                    Instantiate(collectible, room.GetRoomCentre(), collectible.transform.rotation);
+            }
         }
     }
 

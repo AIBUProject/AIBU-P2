@@ -7,6 +7,9 @@ public class PlayerController : MonoBehaviour
 
     new public Transform transform;
     private int collectedObjects = 0;
+    private int health = 3;
+
+    private bool isAlive = true;
 
     private bool goUp = false;
     private bool goDown = false;
@@ -28,8 +31,10 @@ public class PlayerController : MonoBehaviour
 
     }
     void Update() {
-        collect();
-        movementInput();
+        if(isAlive){
+            collect();
+            movementInput();
+        }
     }
    
     private void movementInput() {
@@ -117,11 +122,25 @@ public class PlayerController : MonoBehaviour
 
     private void collect() {
         if (Input.GetKeyDown(KeyCode.E)&& collectEnabled){
-
-
-            collectedObjects++;
+        collectedObjects++;
         Debug.Log(collectedObjects);
         Destroy(collectedGameObject);
+        }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        Debug.Log("Player took " + damage + " damage, health is now " + health);
+        if(health <= 0)
+        {
+            //die
+            Debug.Log("Player lost");
+        }
+        else
+        {
+            Debug.Log("Respawn player");
+            //teleport to start
         }
     }
 

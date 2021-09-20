@@ -264,8 +264,6 @@ Transform:
   - {fileID: 1809649281}
   - {fileID: 1517867566}
   - {fileID: 1265901209}
-  - {fileID: 1724715629}
-  - {fileID: 752969111}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -519,8 +517,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 486529403}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.0037, z: 0}
-  m_LocalScale: {x: 1.0935, y: 1.1229, z: 1}
+  m_LocalPosition: {x: -0.0002, y: -0.00005, z: 0}
+  m_LocalScale: {x: 1.0937297, y: 1.1111292, z: 1}
   m_Children: []
   m_Father: {fileID: 134372310}
   m_RootOrder: 5
@@ -959,8 +957,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 134372310}
-  m_RootOrder: 10
+  m_Father: {fileID: 1265901209}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!68 &752969112
 EdgeCollider2D:
@@ -978,7 +976,8 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -10.497209, y: -0.8089637}
+  - {x: -10.504379, y: -2.1641567}
+  - {x: -10.5047865, y: -0.8043821}
   - {x: -10.392349, y: -0.815276}
   - {x: -9.753186, y: -0.73558813}
   - {x: -9.270646, y: -0.86471003}
@@ -1031,7 +1030,8 @@ EdgeCollider2D:
   - {x: 1.583227, y: 5.0177174}
   - {x: 1.6164238, y: 5.2970204}
   - {x: 1.633295, y: 5.677684}
-  - {x: 1.5984193, y: 6.078038}
+  - {x: 1.6063558, y: 6.003393}
+  - {x: 3.996222, y: 6.0012207}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
@@ -1512,7 +1512,9 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1724715629}
+  - {fileID: 752969111}
   m_Father: {fileID: 134372310}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1592,8 +1594,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1517867564}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.0054, y: 0.0087, z: 0}
-  m_LocalScale: {x: 1.0932, y: 1.1225, z: 1}
+  m_LocalPosition: {x: 0.00008, y: 0.00002, z: 0}
+  m_LocalScale: {x: 1.0937598, y: 1.1111047, z: 1}
   m_Children: []
   m_Father: {fileID: 134372310}
   m_RootOrder: 7
@@ -1626,8 +1628,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 134372310}
-  m_RootOrder: 9
+  m_Father: {fileID: 1265901209}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!68 &1724715630
 EdgeCollider2D:
@@ -1645,7 +1647,8 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -10.501985, y: 2.1902466}
+  - {x: -10.501985, y: 3.803572}
+  - {x: -10.505479, y: 2.1990647}
   - {x: -10.056335, y: 2.2052152}
   - {x: -9.729441, y: 2.297686}
   - {x: -9.439237, y: 2.4505656}
@@ -1667,7 +1670,8 @@ EdgeCollider2D:
   - {x: -1.5724194, y: 5.159783}
   - {x: -1.3485364, y: 5.6312113}
   - {x: -1.2200637, y: 5.970269}
-  - {x: -1.205421, y: 6.072905}
+  - {x: -1.2167798, y: 6.001421}
+  - {x: -3.1088486, y: 5.9996963}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
@@ -1748,8 +1752,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1809649279}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.0029, y: 0.0118, z: 0}
-  m_LocalScale: {x: 1.0928, y: 1.1223, z: 1}
+  m_LocalPosition: {x: -0.00013, y: -0.00045, z: 0}
+  m_LocalScale: {x: 1.0937401, y: 1.1111712, z: 1}
   m_Children: []
   m_Father: {fileID: 134372310}
   m_RootOrder: 6

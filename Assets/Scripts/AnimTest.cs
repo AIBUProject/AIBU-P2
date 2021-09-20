@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class AnimTest : MonoBehaviour
 {
 
     new public Transform transform;
@@ -32,19 +32,23 @@ public class PlayerController : MonoBehaviour
         movementHandler();
 
     }
-    void Update() {
-        if(isAlive){
+    void Update()
+    {
+        if (isAlive)
+        {
             collect();
             movementInput();
         }
     }
-   
-    private void movementInput() {
+
+    private void movementInput()
+    {
         if (Input.GetKey("up"))
         {
             goUp = true;
         }
-        else {
+        else
+        {
             goUp = false;
         }
         if (Input.GetKey("left"))
@@ -72,7 +76,8 @@ public class PlayerController : MonoBehaviour
             goDown = false;
         }
     }
-    private void movementHandler() {
+    private void movementHandler()
+    {
 
         if (goUp)
         {
@@ -80,7 +85,8 @@ public class PlayerController : MonoBehaviour
             {
                 transform.position = new Vector2(transform.position.x, transform.position.y + 0.07f);
             }
-            else {
+            else
+            {
                 transform.position = new Vector2(transform.position.x, transform.position.y + 0.1f);
             }
             anim.SetTrigger("goUp");
@@ -137,11 +143,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void collect() {
-        if (Input.GetKeyDown(KeyCode.E)&& collectEnabled){
-        collectedObjects++;
-        Debug.Log(collectedObjects);
-        Destroy(collectedGameObject);
+    private void collect()
+    {
+        if (Input.GetKeyDown(KeyCode.E) && collectEnabled)
+        {
+            collectedObjects++;
+            Debug.Log(collectedObjects);
+            Destroy(collectedGameObject);
         }
     }
 
@@ -149,7 +157,7 @@ public class PlayerController : MonoBehaviour
     {
         health -= damage;
         Debug.Log("Player took " + damage + " damage, health is now " + health);
-        if(health <= 0)
+        if (health <= 0)
         {
             //die
             Debug.Log("Player lost");
@@ -161,18 +169,21 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void setCollectEnabled(bool b) {
+    public void setCollectEnabled(bool b)
+    {
 
         collectEnabled = b;
     }
 
-    public int getCollectedGameObject() {
+    public int getCollectedGameObject()
+    {
 
         return collectedObjects;
     }
 
-    public void setCollectedGameObject(GameObject g) {
+    public void setCollectedGameObject(GameObject g)
+    {
 
-    collectedGameObject =  g;
-}
+        collectedGameObject = g;
+    }
 }

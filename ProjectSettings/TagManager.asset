@@ -45,9 +45,12 @@ TagManager:
   - name: Ground
     uniqueID: 494953447
     locked: 0
+  - name: Foreground_Top
+    uniqueID: 100148817
+    locked: 0
   - name: Player
     uniqueID: 3767404907
     locked: 0
-  - name: Foreground
+  - name: Foreground_Bottom
     uniqueID: 2590007335
     locked: 0

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1313399626904938515}
   m_Layer: 0
   m_Name: TrollSpawner
-  m_TagString: Untagged
+  m_TagString: Spawner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 3704349506801004488, guid: ef7cd71e55fdeee478be0a47e1058f42, type: 3}
+  spawnLocationObject: {fileID: 6417265346520481594, guid: 9aed04641541552449040286b1a76d5d, type: 3}
 --- !u!61 &1313399626904938515
 BoxCollider2D:
   m_ObjectHideFlags: 0

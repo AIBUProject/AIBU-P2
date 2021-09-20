@@ -12,7 +12,7 @@ public class PlayerStateTracker : MonoBehaviour
     //The Clips used. Currently, clip 0 is footsteps, clip 1 is death sound, clip 2 is
     [SerializeField] private AudioClip[] audioClip;
 
-
+    public GameObject player;
 
     //Audio Variables, mostly used for Foley to change quickly when testing
     [SerializeField] private float lowestVol = 0.33f;
@@ -27,6 +27,9 @@ public class PlayerStateTracker : MonoBehaviour
     public bool isMoving;
     public bool playerIsAlive;
     private float delay;
+    private string tempState;
+    private string currentState = "defaultState";
+
     private void Awake()
     {
         
@@ -48,6 +51,7 @@ public class PlayerStateTracker : MonoBehaviour
         MovementCheck();
         UpdateState();
         PlayOneShots();
+        TrollCheck();
 
     }
 
@@ -69,6 +73,35 @@ public class PlayerStateTracker : MonoBehaviour
         }        
     }
 
+    private void TrollCheck()
+    {
+        if (GameObject.Find("Troll"))
+        {
+            tempState = "chasedState";
+            
+        }
+        else
+        {
+            tempState = "defaultState";
+            
+        }
+        if (tempState != currentState)
+        {
+            switch (tempState)
+            {
+                case "defaultState":
+                    snapshotController.ChangeMixerState("defaultState");
+                    PlaySound("trollAngry");
+                    break;
+                case "chasedState":
+                    PlaySound("twig");
+                    snapshotController.ChangeMixerState("chasedState");
+                    break;
+            }
+            currentState = tempState;
+        }
+    }
+
     //The received snapshot is played in the selected audioSource. Source 0 is for footsteps and other foley primarily, source 1 is for music, 
     private void PlaySound(string clip)
     {
@@ -85,14 +118,27 @@ public class PlayerStateTracker : MonoBehaviour
                 }
                 break;
                 //Death sound
-            case "playerDied":                
-                    audioSource[0].reverbZoneMix = Random.Range(1f, 1.2f);
-                    audioSource[0].volume = Random.Range(lowestVol, highestVol);
-                    audioSource[0].pitch = Random.Range(lowestPitch, highestPitch);
-                    audioSource[0].PlayOneShot(audioClip[1]);
-                
+            case "playerDied":
+                audioSource[0].reverbZoneMix = Random.Range(1.2f, 1.4f);
+                audioSource[0].volume = Random.Range(1.4f, 1.5f);
+                audioSource[0].pitch = Random.Range(1.2f, 1.4f);
+                audioSource[0].PlayOneShot(audioClip[1]);
+
                 break;
-                //AUDIO SOURCE 2 (ambience one shots)
+                //Branch that breaks when troll spawns
+            case "twig":
+                    audioSource[0].reverbZoneMix = Random.Range(1.2f, 1.4f);
+                    audioSource[0].volume = Random.Range(1.4f, 1.5f);
+                    audioSource[0].pitch = Random.Range(1.3f, 1.4f);
+                    audioSource[0].PlayOneShot(audioClip[4]);
+                break;
+            case "trollAngry":
+                audioSource[1].reverbZoneMix = Random.Range(0.82f, 0.9f);
+                audioSource[1].volume = Random.Range(0.6f, 0.7f);
+                audioSource[1].pitch = Random.Range(0.8f, 0.9f);
+                audioSource[1].PlayOneShot(audioClip[5]);
+                break;
+            //AUDIO SOURCE 2 (ambience one shots)
             case "hoot":
                 audioSource[2].volume = Random.Range(0.6f, 0.7f);
                 audioSource[2].clip = audioClip[3];
@@ -108,10 +154,10 @@ public class PlayerStateTracker : MonoBehaviour
     //Checks if the player is moving 
     private void MovementCheck()
     {
-        if (transform.position != earlierPosition)
+        if (player.transform.position != earlierPosition)
         {
             isMoving = true;
-            earlierPosition = transform.position;
+            earlierPosition = player.transform.position;
         }
         else
         {

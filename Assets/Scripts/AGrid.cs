@@ -13,6 +13,8 @@ public class AGrid : MonoBehaviour
       if(GameObject.Find("RoomController").GetComponentInChildren<RoomController>().spawnedEndRoom == true && doOnce == false){
             if (gridWait()) {
                 Instantiate(pathfinder, new Vector2(0, 0), Quaternion.identity);
+
+                GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().setAllowInput(true);
                 doOnce = true;
             }
           
@@ -24,7 +26,7 @@ public class AGrid : MonoBehaviour
         //Debug.Log(seconds);
         waitTimer += Time.deltaTime;
 
-        if (waitTimer >= 2f)
+        if (waitTimer >= 1f)
         {
 
             waitTimer = 0;

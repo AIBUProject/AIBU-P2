@@ -215,22 +215,22 @@ public class RoomController : MonoBehaviour
                         {
                             case "Rock":
                                 randomInt = Random.Range(0,100);
-                                if(randomInt < 25) //Byt ut mot spawnrate!!
+                                if(randomInt < 90) //Byt ut mot spawnrate!!
                                     child.SetActive(true);
                                 break;
                             case "Mushroom":
                                 randomInt = Random.Range(0,100);
-                                if(randomInt < 25) //Byt ut mot spawnrate!!
+                                if(randomInt < 90) //Byt ut mot spawnrate!!
                                    child.SetActive(true);
                                 break;
                             case "Collectible":
                                 randomInt = Random.Range(0,100);
-                                if(randomInt < 25) //Byt ut mot spawnrate!!
+                                if(randomInt < 90) //Byt ut mot spawnrate!!
                                     child.SetActive(true);
                                 break;
                             case "Spawner":
                                 randomInt = Random.Range(0,100);
-                                if(randomInt < 25) //Byt ut mot spawnrate!!
+                                if(randomInt < 90) //Byt ut mot spawnrate!!
                                    child.SetActive(true);
                                 break;
                         }

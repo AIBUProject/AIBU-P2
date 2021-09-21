@@ -28,6 +28,7 @@ public class PlayerStateTracker : MonoBehaviour
     public bool playerIsAlive;
     public bool isAlive;
     private float delay;
+    private float delay2;
     private string tempState;
     private string currentState = "defaultState";
 
@@ -39,7 +40,7 @@ public class PlayerStateTracker : MonoBehaviour
     {
         audioSource = GetComponents<AudioSource>();
         PlaySound("defaultMusic");
-
+        isAlive = true;
     }
 
     // Update is called once per frame
@@ -60,11 +61,10 @@ public class PlayerStateTracker : MonoBehaviour
     //Does checks to determine what sounds to be playing every frame. From footsteps, to death sound, etc
     private void UpdateState()
     {
-        if (!isAlive)
-        {
+            if (GameObject.Find("Canvas").GetComponentInChildren<FadeBlack>().getDoEnd() == true && isAlive) {
             PlaySound("playerDied");
             PlaySound("trollChomp");
-            isAlive = true;
+            isAlive = false;
         }
         if (isMoving)
         {
@@ -86,14 +86,14 @@ public class PlayerStateTracker : MonoBehaviour
         }
         if (!audioSource[3].isPlaying && currentState!="chasedState")
         {
-            delay = Random.Range(minDelay, maxDelay);
+            delay2 = Random.Range(minDelay-2f, maxDelay+3f);
             PlaySound("chuScared");
         }
     }
 
     private void TrollCheck()
     {
-        if (GameObject.Find("Troll"))
+        if (GameObject.Find("Troll") && isAlive)
         {
             tempState = "chasedState";
             TrollProximityVolume();

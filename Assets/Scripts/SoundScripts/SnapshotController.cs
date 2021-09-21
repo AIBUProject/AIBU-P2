@@ -62,8 +62,10 @@ public class SnapshotController : MonoBehaviour
     }
     public void DistanceAdjustment(float dist)
     {
+            if(dist>2 && dist < 30)
+        {
             audioMixer.SetFloat("Music", ((Mathf.Log10(1 / dist) * 20) + 6));
-
+        }
     }   
     public void SetDefaultMusicVolume()
     {

@@ -475,6 +475,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8199f4a78e1047441b31c15f98d7ac34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blackFade: {fileID: 709238316}
 --- !u!114 &888661193
 MonoBehaviour:
   m_ObjectHideFlags: 0

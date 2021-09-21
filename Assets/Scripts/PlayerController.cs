@@ -18,10 +18,12 @@ public class PlayerController : MonoBehaviour
 
     private bool collectEnabled = false;
     private GameObject collectedGameObject;
+    private Animator anim;
     // Start is called before the first frame update
     void Start()
     {
         Application.targetFrameRate = 300;
+        anim = this.gameObject.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -81,8 +83,8 @@ public class PlayerController : MonoBehaviour
             else {
                 transform.position = new Vector2(transform.position.x, transform.position.y + 0.1f);
             }
-           
-
+            anim.SetTrigger("goUp");
+            transform.localScale = new Vector2(1, 1);
         }
         if (goLeft)
         {
@@ -94,6 +96,8 @@ public class PlayerController : MonoBehaviour
             {
                 transform.position = new Vector2(transform.position.x - 0.1f, transform.position.y);
             }
+            anim.SetTrigger("goSide");
+            transform.localScale = new Vector2(-1, 1);
         }
 
         if (goRight)
@@ -106,6 +110,8 @@ public class PlayerController : MonoBehaviour
             {
                 transform.position = new Vector2(transform.position.x + 0.1f, transform.position.y);
             }
+            anim.SetTrigger("goSide");
+            transform.localScale = new Vector2(1, 1);
         }
         if (goDown)
         {
@@ -117,6 +123,17 @@ public class PlayerController : MonoBehaviour
             {
                 transform.position = new Vector2(transform.position.x, transform.position.y - 0.1f);
             }
+            anim.SetTrigger("goDown");
+            transform.localScale = new Vector2(1, 1);
+        }
+        if (!goRight && !goLeft && !goUp && !goDown)
+        {
+            anim.speed = 0;
+
+        }
+        else
+        {
+            anim.speed = 1;
         }
     }
 

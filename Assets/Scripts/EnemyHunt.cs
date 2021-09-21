@@ -16,7 +16,7 @@ public class EnemyHunt : MonoBehaviour
         if (isHunting) {
             
             if (makeNewTime) {
-                huntTime = Random.Range(10, 21);
+                huntTime = Random.Range(10, 18);
                 makeNewTime = false;
             }
             

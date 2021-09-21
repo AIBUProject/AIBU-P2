@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2310070947487722047}
+  - component: {fileID: 6491343454434241615}
   m_Layer: 0
   m_Name: Rock1
   m_TagString: Rock
@@ -32,6 +33,55 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!68 &6491343454434241615
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 897847706224342803}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -0.9911585, y: 0.03631436}
+  - {x: 0.55138326, y: 0.023009375}
+  - {x: 0.64114636, y: -0.0673375}
+  - {x: 0.8364716, y: -0.05949016}
+  - {x: 0.94288033, y: -0.105796196}
+  - {x: 1.0369806, y: -0.23319274}
+  - {x: 0.9476867, y: -0.36613286}
+  - {x: 1.0259898, y: -0.43134242}
+  - {x: 1.0215579, y: -0.58596945}
+  - {x: 0.9513883, y: -0.6309535}
+  - {x: 0.829263, y: -0.55340207}
+  - {x: 0.7177324, y: -0.605751}
+  - {x: 0.5838615, y: -0.62106454}
+  - {x: 0.40033624, y: -0.69674057}
+  - {x: 0.24167766, y: -0.61910343}
+  - {x: 0.11830983, y: -0.60765874}
+  - {x: 0.003891949, y: -0.6809472}
+  - {x: -0.17342475, y: -0.7138135}
+  - {x: -0.32654372, y: -0.6558622}
+  - {x: -0.46912706, y: -0.73156065}
+  - {x: -0.62870216, y: -0.74736243}
+  - {x: -0.7190688, y: -0.6676043}
+  - {x: -0.96755666, y: -0.70608234}
+  - {x: -1.0204141, y: -0.62084275}
+  - {x: -0.94548553, y: -0.5244347}
+  - {x: -0.9782377, y: -0.42404407}
+  - {x: -0.87338954, y: -0.37828186}
+  - {x: -0.95036006, y: -0.12961869}
+  - {x: -0.98615813, y: 0.032683082}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
 --- !u!1 &3782605088040875258
 GameObject:
   m_ObjectHideFlags: 0
@@ -57,7 +107,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3782605088040875258}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.041, z: 0}
+  m_LocalPosition: {x: 0, y: -0.008, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2310070947487722047}

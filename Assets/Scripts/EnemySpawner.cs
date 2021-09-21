@@ -8,7 +8,7 @@ public class EnemySpawner : MonoBehaviour
     public GameObject spawnLocationObject;
     private Transform spawnLocation;
 
-    private bool allowSpawn = true;
+    private bool allowSpawn = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,11 +29,11 @@ public class EnemySpawner : MonoBehaviour
 
                 int random = Random.Range(0, 10);
                 Debug.Log(random);
-               if (random <= 7)
-              {
+            if (random <= 7)
+            {
 
-               }
-              else {
+            }
+            else if (random >= 8) { 
                  Debug.Log(random);
             GameObject.Find("TrollHuntTimer").GetComponent<EnemyHunt>().setIsHunting(true);
             Instantiate(enemy, spawnLocation.position, spawnLocation.rotation);

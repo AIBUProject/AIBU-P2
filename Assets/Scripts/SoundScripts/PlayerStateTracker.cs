@@ -47,7 +47,8 @@ public class PlayerStateTracker : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.M))
         {
-            snapshotController.MuteAudio();
+            //snapshotController.MuteAudio();
+            snapshotController.SetDefaultMusicVolume();
         }
         MovementCheck();
         UpdateState();
@@ -62,6 +63,8 @@ public class PlayerStateTracker : MonoBehaviour
         if (!isAlive)
         {
             PlaySound("playerDied");
+            PlaySound("trollChomp");
+            isAlive = true;
         }
         if (isMoving)
         {
@@ -69,17 +72,10 @@ public class PlayerStateTracker : MonoBehaviour
         }
 
     }
-    void TrollProximityVolume(bool chaseStatus)
+    void TrollProximityVolume()
     {
-        if (chaseStatus)
-        {
             float dist = Vector3.Distance(GameObject.Find("Troll").transform.position, player.transform.position);
-            snapshotController.DistanceAdjustment(dist, true);
-        }
-        else
-        {
-            snapshotController.DistanceAdjustment(-1, false);
-        }
+            snapshotController.DistanceAdjustment(dist);
     }
     private void PlayOneShots()
     {
@@ -100,11 +96,12 @@ public class PlayerStateTracker : MonoBehaviour
         if (GameObject.Find("Troll"))
         {
             tempState = "chasedState";
-            TrollProximityVolume(true);
+            TrollProximityVolume();
 
         }
         else
         {
+
             tempState = "defaultState";
             
         }
@@ -113,7 +110,7 @@ public class PlayerStateTracker : MonoBehaviour
             switch (tempState)
             {
                 case "defaultState":
-                    TrollProximityVolume(false);
+                    snapshotController.SetDefaultMusicVolume();
                     snapshotController.ChangeMixerState("defaultState");
                     PlaySound("trollAngry");
                     StartCoroutine(FadeAudioSource.StartFade(audioSource[3], 3f, 0));
@@ -146,11 +143,10 @@ public class PlayerStateTracker : MonoBehaviour
                 break;
                 //Death sound
             case "playerDied":
-                audioSource[0].reverbZoneMix = Random.Range(1.2f, 1.4f);
-                audioSource[0].volume = Random.Range(1.4f, 1.5f);
-                audioSource[0].pitch = Random.Range(1.2f, 1.4f);
-                audioSource[0].PlayOneShot(audioClip[1]);
-
+                audioSource[3].reverbZoneMix = Random.Range(1f, 1.1f);
+                audioSource[3].volume = Random.Range(0.55f, 0.6f);
+                audioSource[3].pitch = Random.Range(0.9f, 1f);
+                audioSource[3].PlayOneShot(audioClip[1]);
                 break;
                 //Branch that breaks when troll spawns
             case "twig":
@@ -164,6 +160,12 @@ public class PlayerStateTracker : MonoBehaviour
                 audioSource[1].volume = Random.Range(0.5f, 0.6f);
                 audioSource[1].pitch = Random.Range(0.8f, 0.9f);
                 audioSource[1].PlayOneShot(audioClip[5]);
+                break;
+            case "trollChomp":
+                audioSource[1].reverbZoneMix = Random.Range(0.6f, 0.7f);
+                audioSource[1].volume = Random.Range(0.5f, 0.6f);
+                audioSource[1].pitch = Random.Range(0.8f, 0.9f);
+                audioSource[1].PlayOneShot(audioClip[9]);
                 break;
             //AUDIO SOURCE 2 & 3 (ambience one shots)
             case "chasedAmbient":
@@ -181,7 +183,6 @@ public class PlayerStateTracker : MonoBehaviour
                 audioSource[3].clip = audioClip[7];
                 audioSource[3].PlayDelayed(delay);
                 break;
-
             default:
                 Debug.Log("Clip: "+clip+" was received, but nothing played");
                 break;

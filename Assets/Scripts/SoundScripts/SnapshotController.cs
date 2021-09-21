@@ -60,18 +60,15 @@ public class SnapshotController : MonoBehaviour
             currentState = state;
 
     }
-    public void DistanceAdjustment(float dist, bool chaseStatus)
+    public void DistanceAdjustment(float dist)
     {
-        if (chaseStatus)
-        {
             audioMixer.SetFloat("Music", ((Mathf.Log10(1 / dist) * 20) + 6));
-        }
-        else
-        {
-            audioMixer.SetFloat("Music", -11f);
-        }
 
     }   
+    public void SetDefaultMusicVolume()
+    {
+        audioMixer.SetFloat("Music", -11f);
+    }
 
 }
 

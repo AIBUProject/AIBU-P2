@@ -19,7 +19,6 @@ public class RoomController : MonoBehaviour
     Room currentRoom;
     Queue<RoomInfo> loadRoomQueue = new Queue<RoomInfo>();
     public List<Room> loadedRooms = new List<Room>();
-    public GameObject collectible;
     bool isLoadingRoom = false;
     public bool spawnedEndRoom = false;
     public bool updatedRooms = false;
@@ -196,11 +195,49 @@ public class RoomController : MonoBehaviour
         yield return new WaitForSeconds(0.2F);
         foreach(Room room in loadedRooms)
         {
-            if(!(room.name.Contains("End") || (room.X == 0 && room.Y == 0)))
+            GameObject spawnables = room.gameObject.transform.Find("Spawnables").gameObject;
+            if(spawnables == null){
+                Debug.Log("No spawnables object in this room " + room.name);
+            }
+            else if(spawnables.transform.childCount < 1)
             {
-                int randomInt = Random.Range(0,100);
-                if(randomInt < 25)
-                    Instantiate(collectible, room.GetRoomCentre(), collectible.transform.rotation);
+                Debug.Log("No spawnable children in this room " + room.name);
+            }
+            else
+            {
+                if(!(room.name.Contains("End") || (room.X == 0 && room.Y == 0)))
+                {
+                    for (int i = 0; i < spawnables.transform.childCount; i++)
+                    {
+                        int randomInt = 0;
+                        GameObject child = spawnables.transform.GetChild(i).gameObject;
+                        switch(child.tag)
+                        {
+                            case "Rock":
+                                randomInt = Random.Range(0,100);
+                                if(randomInt < 25) //Byt ut mot spawnrate!!
+                                    child.SetActive(true);
+                                break;
+                            case "Mushroom":
+                                randomInt = Random.Range(0,100);
+                                if(randomInt < 25) //Byt ut mot spawnrate!!
+                                   child.SetActive(true);
+                                break;
+                            case "Collectible":
+                                randomInt = Random.Range(0,100);
+                                if(randomInt < 25) //Byt ut mot spawnrate!!
+                                    child.SetActive(true);
+                                break;
+                            case "Spawner":
+                                randomInt = Random.Range(0,100);
+                                if(randomInt < 25) //Byt ut mot spawnrate!!
+                                   child.SetActive(true);
+                                break;
+                        }
+                    }
+                    
+                    
+                }
             }
         }
     }

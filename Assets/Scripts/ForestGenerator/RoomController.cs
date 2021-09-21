@@ -209,31 +209,10 @@ public class RoomController : MonoBehaviour
                 {
                     for (int i = 0; i < spawnables.transform.childCount; i++)
                     {
-                        int randomInt = 0;
+                        int randomInt = Random.Range(0,100);
                         GameObject child = spawnables.transform.GetChild(i).gameObject;
-                        switch(child.tag)
-                        {
-                            case "Rock":
-                                randomInt = Random.Range(0,100);
-                                if(randomInt < 90) //Byt ut mot spawnrate!!
-                                    child.SetActive(true);
-                                break;
-                            case "Mushroom":
-                                randomInt = Random.Range(0,100);
-                                if(randomInt < 90) //Byt ut mot spawnrate!!
-                                   child.SetActive(true);
-                                break;
-                            case "Collectible":
-                                randomInt = Random.Range(0,100);
-                                if(randomInt < 90) //Byt ut mot spawnrate!!
-                                    child.SetActive(true);
-                                break;
-                            case "Spawner":
-                                randomInt = Random.Range(0,100);
-                                if(randomInt < 90) //Byt ut mot spawnrate!!
-                                   child.SetActive(true);
-                                break;
-                        }
+                        if(randomInt < child.GetComponent<Spawnable>().spawnChance)
+                            child.SetActive(true);
                     }
                     
                     

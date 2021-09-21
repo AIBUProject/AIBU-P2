@@ -57,3 +57,9 @@ TagManager:
   - name: Foreground_Bottom
     uniqueID: 2590007335
     locked: 0
+  - name: Rock
+    uniqueID: 3155047609
+    locked: 0
+  - name: Mushroom
+    uniqueID: 169649763
+    locked: 0

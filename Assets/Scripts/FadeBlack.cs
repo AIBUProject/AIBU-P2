@@ -12,7 +12,7 @@ public class FadeBlack : MonoBehaviour
     private bool doFadeOut = true;
     private float reloadTimer = 0;
     private bool doEnd = false;
- 
+
     void Start()
     {
         blackFade.canvasRenderer.SetAlpha(1.0f);
@@ -22,7 +22,7 @@ public class FadeBlack : MonoBehaviour
 
     private void Update()
     {
-        if (GameObject.Find("RoomController").GetComponentInChildren<RoomController>().spawnedEndRoom == true && doFadeOut == true){
+        if (GameObject.Find("RoomController").GetComponentInChildren<RoomController>().spawnedEndRoom == true && doFadeOut == true) {
             fadeOut();
             doFadeOut = false;
         }
@@ -32,12 +32,12 @@ public class FadeBlack : MonoBehaviour
                 fadeIn();
                 doFadeIn = false;
             }
-            
+
             GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().setAllowInput(false);
-            if (reloadCountdown(2.0f)== true){
+            if (reloadCountdown(2.0f) == true) {
                 reloadScene();
             }
-            
+
         }
     }
 
@@ -45,7 +45,7 @@ public class FadeBlack : MonoBehaviour
     {
         blackFade.CrossFadeAlpha(0, 1.5f, false);
     }
-    void fadeIn() 
+    void fadeIn()
     {
         blackFade.canvasRenderer.SetAlpha(0.0f);
         blackFade.CrossFadeAlpha(1, 1f, false);
@@ -57,6 +57,10 @@ public class FadeBlack : MonoBehaviour
 
     public void setDoEnd(bool b) {
         doEnd = b;
+    }
+    public bool getDoEnd() {
+
+        return doEnd;
     }
     private bool reloadCountdown(float seconds)
     {

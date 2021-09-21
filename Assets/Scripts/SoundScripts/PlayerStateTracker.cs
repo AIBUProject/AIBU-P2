@@ -26,6 +26,7 @@ public class PlayerStateTracker : MonoBehaviour
     private Vector3 earlierPosition;
     public bool isMoving;
     public bool playerIsAlive;
+    public bool isAlive;
     private float delay;
     private string tempState;
     private string currentState = "defaultState";
@@ -58,11 +59,27 @@ public class PlayerStateTracker : MonoBehaviour
     //Does checks to determine what sounds to be playing every frame. From footsteps, to death sound, etc
     private void UpdateState()
     {
+        if (!isAlive)
+        {
+            PlaySound("playerDied");
+        }
         if (isMoving)
         {
             PlaySound("moving");
         }
 
+    }
+    void TrollProximityVolume(bool chaseStatus)
+    {
+        if (chaseStatus)
+        {
+            float dist = Vector3.Distance(GameObject.Find("Troll").transform.position, player.transform.position);
+            snapshotController.DistanceAdjustment(dist, true);
+        }
+        else
+        {
+            snapshotController.DistanceAdjustment(-1, false);
+        }
     }
     private void PlayOneShots()
     {
@@ -70,7 +87,12 @@ public class PlayerStateTracker : MonoBehaviour
         {
             delay = Random.Range(minDelay, maxDelay);
             PlaySound("hoot");
-        }        
+        }
+        if (!audioSource[3].isPlaying && currentState!="chasedState")
+        {
+            delay = Random.Range(minDelay, maxDelay);
+            PlaySound("chuScared");
+        }
     }
 
     private void TrollCheck()
@@ -78,7 +100,8 @@ public class PlayerStateTracker : MonoBehaviour
         if (GameObject.Find("Troll"))
         {
             tempState = "chasedState";
-            
+            TrollProximityVolume(true);
+
         }
         else
         {
@@ -90,11 +113,14 @@ public class PlayerStateTracker : MonoBehaviour
             switch (tempState)
             {
                 case "defaultState":
+                    TrollProximityVolume(false);
                     snapshotController.ChangeMixerState("defaultState");
                     PlaySound("trollAngry");
+                    StartCoroutine(FadeAudioSource.StartFade(audioSource[3], 3f, 0));
                     break;
                 case "chasedState":
                     PlaySound("twig");
+                    PlaySound("chasedAmbient");
                     snapshotController.ChangeMixerState("chasedState");
                     break;
             }
@@ -102,7 +128,8 @@ public class PlayerStateTracker : MonoBehaviour
         }
     }
 
-    //The received snapshot is played in the selected audioSource. Source 0 is for footsteps and other foley primarily, source 1 is for music, 
+    //The received snapshot is played in the selected audioSource. Source 0 is for footsteps and other foley primarily,
+    // source 1 is for troll sound, source 2 and 3 for occasional background/character sounds
     private void PlaySound(string clip)
     {
         switch (clip)
@@ -133,16 +160,26 @@ public class PlayerStateTracker : MonoBehaviour
                     audioSource[0].PlayOneShot(audioClip[4]);
                 break;
             case "trollAngry":
-                audioSource[1].reverbZoneMix = Random.Range(0.82f, 0.9f);
-                audioSource[1].volume = Random.Range(0.6f, 0.7f);
+                audioSource[1].reverbZoneMix = Random.Range(0.6f, 0.7f);
+                audioSource[1].volume = Random.Range(0.5f, 0.6f);
                 audioSource[1].pitch = Random.Range(0.8f, 0.9f);
                 audioSource[1].PlayOneShot(audioClip[5]);
                 break;
-            //AUDIO SOURCE 2 (ambience one shots)
+            //AUDIO SOURCE 2 & 3 (ambience one shots)
+            case "chasedAmbient":
+                audioSource[3].volume = 0.64f;
+                audioSource[3].pitch = 0.8f;
+                audioSource[3].PlayOneShot(audioClip[8]);
+                break;
             case "hoot":
                 audioSource[2].volume = Random.Range(0.6f, 0.7f);
                 audioSource[2].clip = audioClip[3];
                 audioSource[2].PlayDelayed(delay);
+                break;
+            case "chuScared":
+                audioSource[3].volume = Random.Range(0.9f, 1f);
+                audioSource[3].clip = audioClip[7];
+                audioSource[3].PlayDelayed(delay);
                 break;
 
             default:
@@ -166,3 +203,4 @@ public class PlayerStateTracker : MonoBehaviour
     }
 
 }
+

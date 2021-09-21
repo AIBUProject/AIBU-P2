@@ -9,22 +9,24 @@ public class SnapshotController : MonoBehaviour
     [SerializeField] private AudioMixerSnapshot defaultMixerState;
     [SerializeField] private AudioMixerSnapshot gettingChasedState;
     [SerializeField] private AudioMixerSnapshot muteAudioState;
+    [SerializeField] private AudioMixer audioMixer;
 
     [SerializeField] private bool muted = false;
-    public string currentState = "defaultState";
     [SerializeField] private AudioSource chasedMusic;
     [SerializeField] private AudioSource defaultMusic;
-
+    public string currentState = "defaultState";
+    private float startingMusicVol;
     // Start is called before the first frame update
     void Start()
     {
         defaultMixerState.TransitionTo(0.3f);
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
     public void MuteAudio()
     {
@@ -42,19 +44,34 @@ public class SnapshotController : MonoBehaviour
     {
             switch (state)
             {
-                case "defaultState":
-                chasedMusic.Stop();
+            case "defaultState":
+                StartCoroutine(FadeAudioSource.StartFade(chasedMusic, 4f, 0));
+                StartCoroutine(FadeAudioSource.StartFade(defaultMusic, 2f, 1));
                 defaultMixerState.TransitionTo(0.7f);
-                defaultMusic.PlayDelayed(0.6f);
+                defaultMusic.Play();
                 break;
-            case "chasedState":               
-                chasedMusic.PlayDelayed(0.1f);
-                defaultMusic.Stop();
+            case "chasedState":
+                StartCoroutine(FadeAudioSource.StartFade(chasedMusic, 0.4f, 1));
+                StartCoroutine(FadeAudioSource.StartFade(defaultMusic, 0.4f, 0));
+                chasedMusic.Play();
                 gettingChasedState.TransitionTo(0.1f);
                     break;
             }
             currentState = state;
 
     }
+    public void DistanceAdjustment(float dist, bool chaseStatus)
+    {
+        if (chaseStatus)
+        {
+            audioMixer.SetFloat("Music", ((Mathf.Log10(1 / dist) * 20) + 6));
+        }
+        else
+        {
+            audioMixer.SetFloat("Music", -11f);
+        }
+
+    }   
 
 }
+

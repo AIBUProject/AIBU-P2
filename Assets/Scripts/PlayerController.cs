@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     private bool goDown = false;
     private bool goLeft = false;
     private bool goRight = false;
+    private bool allowInput = false;
 
     private bool collectEnabled = false;
     private GameObject collectedGameObject;
@@ -40,35 +41,45 @@ public class PlayerController : MonoBehaviour
     }
    
     private void movementInput() {
-        if (Input.GetKey("up"))
+        if (allowInput == true)
         {
-            goUp = true;
+            if (Input.GetKey("up"))
+            {
+                goUp = true;
+            }
+            else
+            {
+                goUp = false;
+            }
+            if (Input.GetKey("left"))
+            {
+                goLeft = true;
+            }
+            else
+            {
+                goLeft = false;
+            }
+            if (Input.GetKey("right"))
+            {
+                goRight = true;
+            }
+            else
+            {
+                goRight = false;
+            }
+            if (Input.GetKey("down"))
+            {
+                goDown = true;
+            }
+            else
+            {
+                goDown = false;
+            }
         }
         else {
             goUp = false;
-        }
-        if (Input.GetKey("left"))
-        {
-            goLeft = true;
-        }
-        else
-        {
             goLeft = false;
-        }
-        if (Input.GetKey("right"))
-        {
-            goRight = true;
-        }
-        else
-        {
             goRight = false;
-        }
-        if (Input.GetKey("down"))
-        {
-            goDown = true;
-        }
-        else
-        {
             goDown = false;
         }
     }
@@ -174,5 +185,12 @@ public class PlayerController : MonoBehaviour
     public void setCollectedGameObject(GameObject g) {
 
     collectedGameObject =  g;
-}
+
+        }
+
+    public void setAllowInput(bool b)
+    {
+
+        allowInput = b;
+    }
 }

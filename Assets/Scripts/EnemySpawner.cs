@@ -21,19 +21,21 @@ public class EnemySpawner : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log(GameObject.Find("TrollHuntTimer").GetComponent<EnemyHunt>().getIsHunting());
-        if (GameObject.Find("TrollHuntTimer").GetComponent<EnemyHunt>().getIsHunting() == false && allowSpawn == true)
+        if (GameObject.Find("TrollHuntTimer").GetComponent<EnemyHunt>().getIsHunting() == false && allowSpawn == true && GameObject.Find("TrollHuntTimer").GetComponent<EnemyHunt>().getOnCooldown() == false)
         {
 
+           
+            
 
-          
 
-                int random = Random.Range(0, 10);
+
+                int random = Random.Range(0, 7);
                 Debug.Log(random);
-            if (random <= 7)
+            if (random <= 5)
             {
 
             }
-            else if (random >= 8) { 
+             else if (random >= 6) { 
                  Debug.Log(random);
             GameObject.Find("TrollHuntTimer").GetComponent<EnemyHunt>().setIsHunting(true);
             Instantiate(enemy, spawnLocation.position, spawnLocation.rotation);

@@ -6,8 +6,11 @@ public class EnemyHunt : MonoBehaviour
 {
     private bool isHunting = false;
     private float huntTimer = 0;
+    private float cooldownTimer = 0;
     private int huntTime;
     private bool makeNewTime = true;
+    private bool onCooldown = false;
+    private bool huntTimeDone = false;
     // Start is called before the first frame update
   
     // Update is called once per frame
@@ -23,13 +26,20 @@ public class EnemyHunt : MonoBehaviour
            
             if (huntCountdown(huntTime))
             {
-                isHunting = false;
+                huntTimeDone = true;
                 makeNewTime = true;
                 // Destroy should happen after player leaves the room
-             
+                
+
             }
         }
-      
+        if (onCooldown == true){
+            if (huntCooldown(10))
+            {
+                onCooldown = false;
+            }
+        }
+       
     }
     private bool huntCountdown(float seconds)
     {
@@ -46,6 +56,21 @@ public class EnemyHunt : MonoBehaviour
 
         return false;
     }
+    private bool huntCooldown(float seconds)
+    {
+        //Debug.Log(seconds);
+        cooldownTimer += Time.deltaTime;
+
+        if (cooldownTimer >= seconds)
+        {
+
+            cooldownTimer = 0;
+            return true;
+
+        }
+
+        return false;
+    }
 
     public void setIsHunting(bool b) {
 
@@ -55,4 +80,21 @@ public class EnemyHunt : MonoBehaviour
 
         return isHunting;
     }
+    public bool getOnCooldown() {
+        return onCooldown;
+    }
+    public void setOnCooldown(bool b) {
+        onCooldown = b;
+    }
+
+    public bool getHuntTimeDone() {
+        return huntTimeDone;
+    }
+
+    public void setHuntTimeDone(bool b) {
+        huntTimeDone = b;
+    }
+
+
+
 }

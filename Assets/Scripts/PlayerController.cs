@@ -84,31 +84,52 @@ public class PlayerController : MonoBehaviour
         }
     }
     private void movementHandler() {
-
         if (goUp)
         {
             if (goLeft || goRight)
             {
                 transform.position = new Vector2(transform.position.x, transform.position.y + 0.07f);
+                if (goRight)
+                {
+                    //anim.SetTrigger("goSide");
+                    transform.localScale = new Vector2(1, 1);
+                }
+                else if (goLeft)
+                {
+                    //anim.SetTrigger("goSide");
+                    transform.localScale = new Vector2(-1, 1);
+                }
             }
-            else {
+            else
+            {
                 transform.position = new Vector2(transform.position.x, transform.position.y + 0.1f);
+                anim.SetTrigger("goUp");
+                transform.localScale = new Vector2(1, 1);
             }
-            anim.SetTrigger("goUp");
-            transform.localScale = new Vector2(1, 1);
+
         }
         if (goLeft)
         {
             if (goUp || goDown)
             {
                 transform.position = new Vector2(transform.position.x - 0.07f, transform.position.y);
+                if (goUp)
+                {
+                    anim.SetTrigger("goUp");
+                    transform.localScale = new Vector2(1, 1);
+                }
+                else if (goDown)
+                {
+                    anim.SetTrigger("goDown");
+                    transform.localScale = new Vector2(1, 1);
+                }
             }
             else
             {
                 transform.position = new Vector2(transform.position.x - 0.1f, transform.position.y);
+                anim.SetTrigger("goSide");
+                transform.localScale = new Vector2(-1, 1);
             }
-            anim.SetTrigger("goSide");
-            transform.localScale = new Vector2(-1, 1);
         }
 
         if (goRight)
@@ -116,12 +137,21 @@ public class PlayerController : MonoBehaviour
             if (goUp || goDown)
             {
                 transform.position = new Vector2(transform.position.x + 0.07f, transform.position.y);
+                if (goUp)
+                {
+                    anim.SetTrigger("goUp");
+                }
+                else if (goDown)
+                {
+                    anim.SetTrigger("goDown");
+                }
             }
             else
             {
                 transform.position = new Vector2(transform.position.x + 0.1f, transform.position.y);
+                anim.SetTrigger("goSide");
             }
-            anim.SetTrigger("goSide");
+
             transform.localScale = new Vector2(1, 1);
         }
         if (goDown)
@@ -129,14 +159,40 @@ public class PlayerController : MonoBehaviour
             if (goLeft || goRight)
             {
                 transform.position = new Vector2(transform.position.x, transform.position.y - 0.07f);
+                if (goLeft)
+                {
+                    //anim.SetTrigger("goSide");
+                    transform.localScale = new Vector2(-1, 1);
+                }
+                else if (goRight)
+                {
+                    //anim.SetTrigger("goSide");
+                    transform.localScale = new Vector2(1, 1);
+                }
             }
             else
             {
                 transform.position = new Vector2(transform.position.x, transform.position.y - 0.1f);
+                anim.SetTrigger("goDown");
+                transform.localScale = new Vector2(1, 1);
             }
-            anim.SetTrigger("goDown");
-            transform.localScale = new Vector2(1, 1);
         }
+
+        /*
+        Vector2 worldpos = cam.WorldToScreenPoint(transform.position);
+        if(goUp && goRight)
+        {
+            if(worldpos.x > worldpos.y)
+            {
+                anim.SetTrigger("goSide");
+            }
+            else
+            {
+                anim.SetTrigger("goUp");
+            }
+        }
+        */
+
         if (!goRight && !goLeft && !goUp && !goDown)
         {
             anim.speed = 0;

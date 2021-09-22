@@ -11,9 +11,9 @@ public class PlayerStateTracker : MonoBehaviour
     [SerializeField] private AudioSource[] audioSource;
     //The Clips used. Currently, clip 0 is footsteps, clip 1 is death sound, clip 2 is
     [SerializeField] private AudioClip[] audioClip;
-
+    private GameObject[] collectibles;
     public GameObject player;
-
+    public GameObject volumeControls;
     //Audio Variables, mostly used for Foley to change quickly when testing
     [SerializeField] private float lowestVol = 0.33f;
     [SerializeField] private float highestVol = 0.48f;
@@ -27,11 +27,13 @@ public class PlayerStateTracker : MonoBehaviour
     public bool isMoving;
     public bool playerIsAlive;
     public bool isAlive;
+    private bool portalNotOpen = true;
     private float delay;
     private float delay2;
+    private bool volumeMenu = true;
     private string tempState;
     private string currentState = "defaultState";
-
+    public int amountToWin=4;
     private void Awake()
     {
         
@@ -41,6 +43,7 @@ public class PlayerStateTracker : MonoBehaviour
         audioSource = GetComponents<AudioSource>();
         PlaySound("defaultMusic");
         isAlive = true;
+       // Invoke("FindCollectiblesSoon", 4);
     }
 
     // Update is called once per frame
@@ -51,28 +54,54 @@ public class PlayerStateTracker : MonoBehaviour
             //snapshotController.MuteAudio();
             snapshotController.SetDefaultMusicVolume();
         }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            volumeControls.SetActive(volumeMenu);
+            volumeMenu = !volumeMenu;
+            Debug.Log("Volume menu is: " + volumeMenu);
+        }
         MovementCheck();
         UpdateState();
         PlayOneShots();
         TrollCheck();
 
     }
-
+    private void FindCollectiblesSoon()
+    {
+        collectibles = GameObject.FindGameObjectsWithTag("Collectible");
+        amountToWin = collectibles.Length;
+        // Code to execute after the delay
+    }
     //Does checks to determine what sounds to be playing every frame. From footsteps, to death sound, etc
     private void UpdateState()
     {
-            if (GameObject.Find("Canvas").GetComponentInChildren<FadeBlack>().getDoEnd() == true && isAlive) {
-            PlaySound("playerDied");
-            PlaySound("trollChomp");
+        if (GameObject.Find("Canvas").GetComponentInChildren<FadeBlack>().getDoEnd() == true && isAlive) {
+        PlaySound("playerDied");
+         PlaySound("trollChomp");
+        snapshotController.SetDefaultMusicVolume();
+         snapshotController.ChangeMixerState("defaultState");
+         PlaySound("trollAngry");
+            StartCoroutine(FadeAudioSource.StartFade(audioSource[3], 3f, 0));
+
             isAlive = false;
         }
         if (isMoving)
         {
             PlaySound("moving");
         }
+        if (player.gameObject.GetComponent<PlayerController>().getCollectedGameObject() == amountToWin) {
+            Debug.Log("Amount to win: " + player.gameObject.GetComponent<PlayerController>().getCollectedGameObject() + " and portal is: " + portalNotOpen);
+            if (portalNotOpen)
+            {
+                PlaySound("openPortal");
+                portalNotOpen = false;
+            }
+            PlaySound("portalAmbience");
+
+        }
 
     }
-    void TrollProximityVolume()
+    private void TrollProximityVolume()
     {
             float dist = Vector3.Distance(GameObject.Find("Troll").transform.position, player.transform.position);
             snapshotController.DistanceAdjustment(dist);
@@ -84,7 +113,7 @@ public class PlayerStateTracker : MonoBehaviour
             delay = Random.Range(minDelay, maxDelay);
             PlaySound("hoot");
         }
-        if (!audioSource[3].isPlaying && currentState!="chasedState")
+        if (!audioSource[3].isPlaying)
         {
             delay2 = Random.Range(minDelay-2f, maxDelay+3f);
             PlaySound("chuScared");
@@ -97,13 +126,10 @@ public class PlayerStateTracker : MonoBehaviour
         {
             tempState = "chasedState";
             TrollProximityVolume();
-
         }
         else
         {
-
-            tempState = "defaultState";
-            
+            tempState = "defaultState";         
         }
         if (tempState != currentState)
         {
@@ -117,6 +143,7 @@ public class PlayerStateTracker : MonoBehaviour
                     break;
                 case "chasedState":
                     PlaySound("twig");
+                    PlaySound("trollAwaken");
                     PlaySound("chasedAmbient");
                     snapshotController.ChangeMixerState("chasedState");
                     break;
@@ -143,10 +170,10 @@ public class PlayerStateTracker : MonoBehaviour
                 break;
                 //Death sound
             case "playerDied":
-                audioSource[3].reverbZoneMix = Random.Range(1f, 1.1f);
-                audioSource[3].volume = Random.Range(0.55f, 0.6f);
-                audioSource[3].pitch = Random.Range(0.9f, 1f);
-                audioSource[3].PlayOneShot(audioClip[1]);
+                audioSource[2].reverbZoneMix = Random.Range(1f, 1.1f);
+                audioSource[2].volume = Random.Range(0.55f, 0.6f);
+                audioSource[2].pitch = Random.Range(0.9f, 1f);
+                audioSource[2].PlayOneShot(audioClip[1]);
                 break;
                 //Branch that breaks when troll spawns
             case "twig":
@@ -155,17 +182,30 @@ public class PlayerStateTracker : MonoBehaviour
                     audioSource[0].pitch = Random.Range(1.3f, 1.4f);
                     audioSource[0].PlayOneShot(audioClip[4]);
                 break;
+                //Troll Sounds
             case "trollAngry":
                 audioSource[1].reverbZoneMix = Random.Range(0.6f, 0.7f);
                 audioSource[1].volume = Random.Range(0.5f, 0.6f);
                 audioSource[1].pitch = Random.Range(0.8f, 0.9f);
                 audioSource[1].PlayOneShot(audioClip[5]);
                 break;
+            case "trollAwaken":
+                audioSource[1].reverbZoneMix = Random.Range(0.6f, 0.7f);
+                audioSource[1].volume = Random.Range(0.5f, 0.6f);
+                audioSource[1].pitch = Random.Range(0.8f, 0.9f);
+                audioSource[1].PlayOneShot(audioClip[10]);
+                break;
             case "trollChomp":
                 audioSource[1].reverbZoneMix = Random.Range(0.6f, 0.7f);
                 audioSource[1].volume = Random.Range(0.5f, 0.6f);
                 audioSource[1].pitch = Random.Range(0.8f, 0.9f);
                 audioSource[1].PlayOneShot(audioClip[9]);
+                break;
+            // Player Sounds when troll is asleep
+            case "chuScared":
+                audioSource[1].volume = Random.Range(1f, 1f);
+                audioSource[1].clip = audioClip[7];
+                audioSource[1].PlayDelayed(delay2);
                 break;
             //AUDIO SOURCE 2 & 3 (ambience one shots)
             case "chasedAmbient":
@@ -178,11 +218,22 @@ public class PlayerStateTracker : MonoBehaviour
                 audioSource[2].clip = audioClip[3];
                 audioSource[2].PlayDelayed(delay);
                 break;
-            case "chuScared":
-                audioSource[3].volume = Random.Range(0.9f, 1f);
-                audioSource[3].clip = audioClip[7];
-                audioSource[3].PlayDelayed(delay);
+            case "openPortal":
+                    audioSource[2].reverbZoneMix = Random.Range(0.6f, 0.7f);
+                    audioSource[2].volume = Random.Range(0.5f, 0.6f);
+                    audioSource[2].pitch = Random.Range(0.8f, 0.9f);
+                    audioSource[2].PlayOneShot(audioClip[11]);
                 break;
+            case "portalAmbience":
+                if (!audioSource[2].isPlaying)
+                {
+                    audioSource[2].reverbZoneMix = Random.Range(0.3f, 0.34f);
+                    audioSource[2].volume = Random.Range(0.08f, 0.09f);
+                    audioSource[2].pitch = Random.Range(0.6f, 0.65f);
+                    audioSource[2].PlayOneShot(audioClip[12]);
+                }
+                break;
+
             default:
                 Debug.Log("Clip: "+clip+" was received, but nothing played");
                 break;

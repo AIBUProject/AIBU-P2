@@ -149,10 +149,11 @@ public class PlayerController : MonoBehaviour
     }
 
     private void collect() {
-        if (Input.GetKeyDown(KeyCode.E)&& collectEnabled){
-        collectedObjects++;
-        Debug.Log(collectedObjects);
-        Destroy(collectedGameObject);
+        //if (Input.GetKeyDown(KeyCode.E)&& collectEnabled){
+        if (collectEnabled){  
+            collectedObjects++;
+            Debug.Log(collectedObjects);
+            Destroy(collectedGameObject);
         }
     }
 

@@ -139,6 +139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1a327bf6d115eb40a901bbf7f336e12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathParticle: {fileID: 8042892738995293704, guid: 47169266689563e4b896e692381640c3, type: 3}
 --- !u!61 &8645936304277115148
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -218,7 +219,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1933956640992017589, guid: e072e704d67c96f49b89f132cc8025c8, type: 3}
       propertyPath: m_SortingLayer
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1933956640992017589, guid: e072e704d67c96f49b89f132cc8025c8, type: 3}
       propertyPath: m_SortingLayerID

@@ -52,5 +52,10 @@ public class VolumeController : MonoBehaviour
         volString = volPerc2 + " %";
         volumePercentageChase.text = volString;
     }
+    public void QuitGame()
+    {
+        Debug.Log("QUIT");
+        Application.Quit();
+    }
 
 }

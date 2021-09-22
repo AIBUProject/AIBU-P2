@@ -58,7 +58,6 @@ public class PlayerStateTracker : MonoBehaviour
         {
             volumeControls.SetActive(volumeMenu);
             volumeMenu = !volumeMenu;
-            Debug.Log("Volume menu is: " + volumeMenu);
         }
         MovementCheck();
         UpdateState();
@@ -90,7 +89,6 @@ public class PlayerStateTracker : MonoBehaviour
             PlaySound("moving");
         }
         if (player.gameObject.GetComponent<PlayerController>().getCollectedGameObject() == amountToWin) {
-            Debug.Log("Amount to win: " + player.gameObject.GetComponent<PlayerController>().getCollectedGameObject() + " and portal is: " + portalNotOpen);
             if (portalNotOpen)
             {
                 PlaySound("openPortal");

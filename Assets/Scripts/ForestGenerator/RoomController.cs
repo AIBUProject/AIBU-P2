@@ -95,6 +95,9 @@ public class RoomController : MonoBehaviour
         if(!hasTop && !hasBottom && !hasLeft && !hasRight)
         {
             roomName +="Cross";
+            if(Random.Range(0,100) < 50){
+                roomName +="2";
+            }
         }
         else if(hasTop && !hasBottom && !hasLeft && !hasRight)
         {

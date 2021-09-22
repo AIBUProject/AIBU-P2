@@ -22,6 +22,7 @@ public class RoomController : MonoBehaviour
     bool isLoadingRoom = false;
     public bool spawnedEndRoom = false;
     public bool updatedRooms = false;
+    public bool populatedRooms = false;
     // Start is called before the first frame update
 
     void Awake()
@@ -55,11 +56,9 @@ public class RoomController : MonoBehaviour
                 StartCoroutine(SpawnEndRoom());
             }   
             return;
-        }
-            
+        } 
         currentLoadRoomData = loadRoomQueue.Dequeue();
         isLoadingRoom = true;
-
         StartCoroutine(LoadRoomRoutine(currentLoadRoomData));
     }
 
@@ -170,9 +169,10 @@ public class RoomController : MonoBehaviour
     {
         spawnedEndRoom = true;
         yield return new WaitForSeconds(3f);
+        PopulateRooms();
+        yield return new WaitUntil(()=> populatedRooms);
         Room endRoom = FindLongDistanceRoom();
         StartCoroutine(ChangeRoom(endRoom, "End"));
-        StartCoroutine(PopulateRooms());
     }
 
     Room FindLongDistanceRoom()
@@ -190,9 +190,8 @@ public class RoomController : MonoBehaviour
         return loadedRooms.ElementAt(index);
     }
 
-    IEnumerator PopulateRooms()
+    void PopulateRooms()
     {
-        yield return new WaitForSeconds(0.2F);
         foreach(Room room in loadedRooms)
         {
             GameObject spawnables = room.gameObject.transform.Find("Spawnables").gameObject;
@@ -219,6 +218,7 @@ public class RoomController : MonoBehaviour
                 }
             }
         }
+        populatedRooms = true;
     }
 
     public void LoadRoom(string name, int x, int y)

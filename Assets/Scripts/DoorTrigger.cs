@@ -12,13 +12,14 @@ public class DoorTrigger : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-
+            
             spawners = GameObject.FindGameObjectsWithTag("Spawner");
             for (int i = 0; i < spawners.Length; i++)
             {
                 Debug.Log("spawner number" + i);
                 spawners[i].GetComponent<EnemySpawner>().setAllowSpawn(true);
             }
+        
         }
     }
 

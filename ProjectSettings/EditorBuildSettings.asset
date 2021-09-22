@@ -18,48 +18,48 @@ EditorBuildSettings:
     path: Assets/Scenes/ForestGenerator/Forest1End.unity
     guid: baf7ff97d9c12d1489c254b4aa335b7a
   - enabled: 1
-    path: Assets/Scenes/ForestGenerator/Forest1EmptyTTop.unity
+    path: Assets/Scenes/ForestGenerator/Forest1TTop.unity
     guid: 3d45f21a2228fa14e85454bcdbdad4a9
   - enabled: 1
-    path: Assets/Scenes/ForestGenerator/Forest1EmptyDeadEndBottom.unity
+    path: Assets/Scenes/ForestGenerator/Forest1DeadEndBottom.unity
     guid: 0fd5ebafa1e14044f9997c4db7cac58e
   - enabled: 1
-    path: Assets/Scenes/ForestGenerator/Forest1EmptyBottomToLeft.unity
+    path: Assets/Scenes/ForestGenerator/Forest1BottomToLeft.unity
     guid: c6d8e3e4451b1c345bad818f035d78f4
   - enabled: 1
-    path: Assets/Scenes/ForestGenerator/Forest1EmptyBottomToRight.unity
+    path: Assets/Scenes/ForestGenerator/Forest1BottomToRight.unity
     guid: f2e3be67b8e4d8c4f8151156fc902200
   - enabled: 1
-    path: Assets/Scenes/ForestGenerator/Forest1EmptyDeadEndLeft.unity
+    path: Assets/Scenes/ForestGenerator/Forest1DeadEndLeft.unity
     guid: a69188befa3d1114fb62feddecd64302
   - enabled: 1
-    path: Assets/Scenes/ForestGenerator/Forest1EmptyDeadEndRight.unity
+    path: Assets/Scenes/ForestGenerator/Forest1DeadEndRight.unity
     guid: a9f62c9556e518e408cd28bcfee7ae28
   - enabled: 1
-    path: Assets/Scenes/ForestGenerator/Forest1EmptyDeadEndTop.unity
+    path: Assets/Scenes/ForestGenerator/Forest1DeadEndTop.unity
     guid: 2a0ded1c013b57f4485f9aa3dae380f3
   - enabled: 1
-    path: Assets/Scenes/ForestGenerator/Forest1EmptyTBottom.unity
+    path: Assets/Scenes/ForestGenerator/Forest1TBottom.unity
     guid: 78597f2cf7a93d24db025b042637b050
   - enabled: 1
-    path: Assets/Scenes/ForestGenerator/Forest1EmptyTLeft.unity
+    path: Assets/Scenes/ForestGenerator/Forest1Left.unity
     guid: ad33ab279631fde4ea8bd36c4f0f2bf6
   - enabled: 1
-    path: Assets/Scenes/ForestGenerator/Forest1EmptyTopToBottom.unity
+    path: Assets/Scenes/ForestGenerator/Forest1TopToBottom.unity
     guid: 29d4af597befdd34dbcd1e967b65a1cc
   - enabled: 1
-    path: Assets/Scenes/ForestGenerator/Forest1EmptyTopToLeft.unity
+    path: Assets/Scenes/ForestGenerator/Forest1TopToLeft.unity
     guid: 569023009709bb549abb68d3a1bf71bf
   - enabled: 1
-    path: Assets/Scenes/ForestGenerator/Forest1EmptyTopToRight.unity
+    path: Assets/Scenes/ForestGenerator/Forest1TopToRight.unity
     guid: 5cd133a0886497a4c820cbca546c1431
   - enabled: 1
-    path: Assets/Scenes/ForestGenerator/Forest1EmptyTRight.unity
+    path: Assets/Scenes/ForestGenerator/Forest1TRight.unity
     guid: f572b0f2282c68b429c2a0204cfcd693
   - enabled: 1
-    path: Assets/Scenes/ForestGenerator/Forest1EmptyLeftToRight.unity
+    path: Assets/Scenes/ForestGenerator/Forest1LeftToRight.unity
     guid: e9ec0c694f10d1245a4fa483fdf77e77
   - enabled: 1
-    path: Assets/Scenes/ForestGenerator/Forest1EmptyCross.unity
+    path: Assets/Scenes/ForestGenerator/Forest1Cross.unity
     guid: a769677671200e846ad9dc9caba128c6
   m_configObjects: {}

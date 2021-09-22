@@ -9,7 +9,7 @@ public class WinCondition : MonoBehaviour
     private GameObject player;
     public Animator animator;
     private bool playedAnim = false;
-    void Start()
+    void Awake()
     {
         scene = SceneManager.GetActiveScene();
         collectibles = GameObject.FindGameObjectsWithTag("Collectible");

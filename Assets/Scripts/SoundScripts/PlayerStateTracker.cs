@@ -33,7 +33,7 @@ public class PlayerStateTracker : MonoBehaviour
     private bool volumeMenu = true;
     private string tempState;
     private string currentState = "defaultState";
-    public int amountToWin=4;
+    public int amountToWin=-1;
     private void Awake()
     {
         
@@ -43,7 +43,7 @@ public class PlayerStateTracker : MonoBehaviour
         audioSource = GetComponents<AudioSource>();
         PlaySound("defaultMusic");
         isAlive = true;
-       // Invoke("FindCollectiblesSoon", 4);
+        Invoke("FindCollectiblesSoon", 8);
     }
 
     // Update is called once per frame

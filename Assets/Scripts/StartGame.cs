@@ -52,7 +52,7 @@ public class StartGame : MonoBehaviour
 
     public void NewGame()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 
     public void QuitGame()

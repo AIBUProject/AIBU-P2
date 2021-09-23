@@ -486,7 +486,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EffectColor: {r: 0.1980242, g: 0.21461049, b: 0.4716981, a: 0.77254903}
-  m_EffectDistance: {x: 5.67, y: -4.81}
+  m_EffectDistance: {x: 2.56, y: -2.46}
   m_UseGraphicAlpha: 1
 --- !u!114 &123717283
 MonoBehaviour:
@@ -521,7 +521,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 0/7
+  m_Text: 
 --- !u!222 &123717284
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -67493,7 +67493,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8584906, g: 0.47378963, b: 0.47378963, a: 0.46666667}
+  m_Color: {r: 0.9245283, g: 0.8416696, b: 0.8416696, a: 0.46666667}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

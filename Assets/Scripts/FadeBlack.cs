@@ -22,11 +22,11 @@ public class FadeBlack : MonoBehaviour
 
     private void Update()
     {
-        if (GameObject.Find("RoomController").GetComponentInChildren<RoomController>().spawnedEndRoom == true && doFadeOut == true) {
+        if (GameObject.Find("RoomController").GetComponentInChildren<RoomController>().populatedRooms == true && doFadeOut == true) {
             fadeOut();
             doFadeOut = false;
         }
-        if (GameObject.Find("RoomController").GetComponentInChildren<RoomController>().spawnedEndRoom == true && doEnd == true)
+        if (GameObject.Find("RoomController").GetComponentInChildren<RoomController>().populatedRooms == true && doEnd == true)
         {
             if (doFadeIn == true) {
                 fadeIn();

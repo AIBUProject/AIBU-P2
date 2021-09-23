@@ -241,10 +241,10 @@ public class PlayerStateTracker : MonoBehaviour
                 }
                 break;
             case "pickup":
-                audioSource[0].reverbZoneMix = Random.Range(1.2f, 1.3f);
-                audioSource[0].volume = Random.Range(0.05f, 0.08f);
-                audioSource[0].pitch = Random.Range(0.9f,1.2f);
-                audioSource[0].PlayOneShot(audioClip[13]);
+                audioSource[4].reverbZoneMix = Random.Range(1.2f, 1.3f);
+                audioSource[4].volume = Random.Range(0.05f, 0.08f);
+                audioSource[4].pitch = Random.Range(0.9f,1.2f);
+                audioSource[4].PlayOneShot(audioClip[13]);
                 break;
             case "portalAmbience":
                    /* audioSource[2].reverbZoneMix = Random.Range(0.4f, 0.45f);

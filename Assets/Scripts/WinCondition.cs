@@ -44,7 +44,8 @@ public class WinCondition : MonoBehaviour
         if (other.tag == "Player" && other.gameObject.GetComponent<PlayerController>().getCollectedGameObject() == amountToWin)
         {
             Debug.Log("You Win");
-            SceneManager.LoadScene(scene.name);
+            GameObject.Find("Canvas").GetComponentInChildren<FadeBlack>().setWinScreen(true);
+            //SceneManager.LoadScene(scene.name);
         }
 
     }

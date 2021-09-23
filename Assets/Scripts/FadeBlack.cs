@@ -8,15 +8,23 @@ public class FadeBlack : MonoBehaviour
 {
     Scene scene;
     public Image blackFade;
+    public Image winScreen;
+    public Image loseScreen;
     private bool doFadeIn = true;
     private bool doFadeOut = true;
     private float reloadTimer = 0;
     private bool doEnd = false;
+    private bool winCheck;
+    private bool loseCheck;
+
+    private Animator anim;
 
     void Start()
     {
         blackFade.canvasRenderer.SetAlpha(1.0f);
         scene = SceneManager.GetActiveScene();
+        winScreen.gameObject.SetActive(false);
+        loseScreen.gameObject.SetActive(false);
 
     }
 
@@ -39,6 +47,30 @@ public class FadeBlack : MonoBehaviour
             }
 
         }
+
+        if (GameObject.Find("RoomController").GetComponentInChildren<RoomController>().populatedRooms == true && winCheck == true)
+        {
+            FadeWin();
+
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().setAllowInput(false);
+            if (reloadCountdown(2.0f) == true)
+            {
+                reloadScene();
+            }
+
+        }
+
+        if (GameObject.Find("RoomController").GetComponentInChildren<RoomController>().populatedRooms == true && loseCheck == true)
+        {
+            FadeLose();
+
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().setAllowInput(false);
+            if (reloadCountdown(2.0f) == true)
+            {
+                reloadScene();
+            }
+
+        }
     }
 
     void fadeOut()
@@ -49,6 +81,18 @@ public class FadeBlack : MonoBehaviour
     {
         blackFade.canvasRenderer.SetAlpha(0.0f);
         blackFade.CrossFadeAlpha(1, 1f, false);
+    }
+
+    void FadeWin()
+    {
+        winScreen.gameObject.SetActive(true);
+        fadeIn();
+    }
+
+    void FadeLose()
+    {
+        loseScreen.gameObject.SetActive(true);
+        fadeIn();
     }
 
     void reloadScene() {
@@ -62,6 +106,17 @@ public class FadeBlack : MonoBehaviour
 
         return doEnd;
     }
+
+    public void setWinScreen(bool b)
+    {
+        winCheck = b;
+    }
+
+    public void setLoseScreen(bool b)
+    {
+        loseCheck = b;
+    }
+
     private bool reloadCountdown(float seconds)
     {
         //Debug.Log(seconds);

@@ -10,7 +10,8 @@ public class EnemyCollision : MonoBehaviour
     {
         if (other.tag == "Player") {
             Instantiate(deathParticle, other.transform.position, Quaternion.identity);
-            GameObject.Find("Canvas").GetComponentInChildren<FadeBlack>().setDoEnd(true);
+            GameObject.Find("Canvas").GetComponentInChildren<FadeBlack>().setLoseScreen(true);
+            //GameObject.Find("Canvas").GetComponentInChildren<FadeBlack>().setDoEnd(true);
         }
         
     }

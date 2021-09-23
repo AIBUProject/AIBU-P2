@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75369d19fed71e949b6297455b2f627f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aIPath: {fileID: 0}
+  aIPath: {fileID: 5206823077263048978, guid: ef7cd71e55fdeee478be0a47e1058f42, type: 3}
   anim: {fileID: -4506921101444698429}
 --- !u!95 &-4506921101444698429
 Animator:

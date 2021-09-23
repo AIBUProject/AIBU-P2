@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Collectible : MonoBehaviour
 {
-    
+    [SerializeField] private ParticleSystem pickupParticle;
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player") {
@@ -17,6 +17,8 @@ public class Collectible : MonoBehaviour
     {
         if (other.tag == "Player")
         {
+            Instantiate(pickupParticle, other.transform.position, Quaternion.identity);
+            pickupParticle.Play();
             other.gameObject.GetComponent<PlayerController>().setCollectEnabled(false);
         }
 

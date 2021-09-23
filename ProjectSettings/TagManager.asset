@@ -8,6 +8,7 @@ TagManager:
   - Spawner
   - Rock
   - Mushroom
+  - CollectibleCounter
   layers:
   - Default
   - TransparentFX
@@ -68,4 +69,7 @@ TagManager:
     locked: 0
   - name: Mushroom
     uniqueID: 169649763
+    locked: 0
+  - name: UI
+    uniqueID: 4086150987
     locked: 0

@@ -34,6 +34,8 @@ public class PlayerStateTracker : MonoBehaviour
     private string tempState;
     private string currentState = "defaultState";
     public int amountToWin=-1;
+    public int collectedPickups=0;
+    private int tempCollectedPickups;
     private void Awake()
     {
         
@@ -49,6 +51,7 @@ public class PlayerStateTracker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        collectedPickups = player.gameObject.GetComponent<PlayerController>().getCollectedGameObject();
         if (Input.GetKeyDown(KeyCode.M))
         {
             //snapshotController.MuteAudio();
@@ -63,7 +66,6 @@ public class PlayerStateTracker : MonoBehaviour
         UpdateState();
         PlayOneShots();
         TrollCheck();
-
     }
     private void FindCollectiblesSoon()
     {
@@ -88,14 +90,23 @@ public class PlayerStateTracker : MonoBehaviour
         {
             PlaySound("moving");
         }
-        if (player.gameObject.GetComponent<PlayerController>().getCollectedGameObject() == amountToWin) {
+        if (player.gameObject.GetComponent<PlayerController>().getCollectedGameObject() == amountToWin)
+        {
             if (portalNotOpen)
             {
                 PlaySound("openPortal");
                 portalNotOpen = false;
             }
             PlaySound("portalAmbience");
-
+        }
+        if (collectedPickups<=amountToWin && collectedPickups != -1)
+        {
+            if (tempCollectedPickups != collectedPickups)
+            {
+                Debug.Log("PickupSound should play");
+                PlaySound("pickup");
+                tempCollectedPickups = collectedPickups;
+            }
         }
 
     }
@@ -221,6 +232,12 @@ public class PlayerStateTracker : MonoBehaviour
                     audioSource[2].volume = Random.Range(0.5f, 0.6f);
                     audioSource[2].pitch = Random.Range(0.8f, 0.9f);
                     audioSource[2].PlayOneShot(audioClip[11]);
+                break;
+            case "pickup":
+                audioSource[0].reverbZoneMix = Random.Range(0.6f, 0.7f);
+                audioSource[0].volume = Random.Range(0.3f, 0.4f);
+                audioSource[0].pitch = Random.Range(0.6f, 0.7f);
+                audioSource[0].PlayOneShot(audioClip[13]);
                 break;
             case "portalAmbience":
                 if (!audioSource[2].isPlaying)

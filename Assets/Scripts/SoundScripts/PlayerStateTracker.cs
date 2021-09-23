@@ -31,6 +31,7 @@ public class PlayerStateTracker : MonoBehaviour
     private float delay;
     private float delay2;
     private bool volumeMenu = true;
+    private bool winConditionFound = false;
     private string tempState;
     private string currentState = "defaultState";
     public int amountToWin=-1;
@@ -38,19 +39,28 @@ public class PlayerStateTracker : MonoBehaviour
     private int tempCollectedPickups;
     private void Awake()
     {
-        
+
     }
     void Start()
     {
         audioSource = GetComponents<AudioSource>();
         PlaySound("defaultMusic");
         isAlive = true;
-        Invoke("FindCollectiblesSoon", 8);
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        if (!winConditionFound)
+        {
+            GameObject exitObj = GameObject.FindGameObjectWithTag("Exit");
+            if (exitObj!=null)
+            {
+                amountToWin = exitObj.GetComponent<WinCondition>().GetAmountToWin();
+                winConditionFound = true;
+            }
+        }
         collectedPickups = player.gameObject.GetComponent<PlayerController>().getCollectedGameObject();
         if (Input.GetKeyDown(KeyCode.M))
         {
@@ -67,12 +77,7 @@ public class PlayerStateTracker : MonoBehaviour
         PlayOneShots();
         TrollCheck();
     }
-    private void FindCollectiblesSoon()
-    {
-        collectibles = GameObject.FindGameObjectsWithTag("Collectible");
-        amountToWin = collectibles.Length;
-        // Code to execute after the delay
-    }
+    
     //Does checks to determine what sounds to be playing every frame. From footsteps, to death sound, etc
     private void UpdateState()
     {
@@ -248,7 +253,6 @@ public class PlayerStateTracker : MonoBehaviour
                     audioSource[2].PlayOneShot(audioClip[12]);
                 }
                 break;
-
             default:
                 Debug.Log("Clip: "+clip+" was received, but nothing played");
                 break;

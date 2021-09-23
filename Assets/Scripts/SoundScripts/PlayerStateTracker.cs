@@ -95,7 +95,7 @@ public class PlayerStateTracker : MonoBehaviour
         {
             PlaySound("moving");
         }
-        if (player.gameObject.GetComponent<PlayerController>().getCollectedGameObject() == amountToWin)
+        if (collectedPickups == amountToWin)
         {
             if (portalNotOpen)
             {
@@ -125,11 +125,12 @@ public class PlayerStateTracker : MonoBehaviour
         if (!audioSource[2].isPlaying)
         {
             delay = Random.Range(minDelay, maxDelay);
+            delay2 = Random.Range(minDelay*2, maxDelay*2);
             PlaySound("hoot");
+            Debug.Log("delay: " + delay + " delay2:" + delay2);
         }
-        if (!audioSource[3].isPlaying)
+        if (!audioSource[5].isPlaying)
         {
-            delay2 = Random.Range(minDelay-2f, maxDelay+3f);
             PlaySound("chuScared");
         }
     }
@@ -217,9 +218,9 @@ public class PlayerStateTracker : MonoBehaviour
                 break;
             // Player Sounds when troll is asleep
             case "chuScared":
-                audioSource[1].volume = Random.Range(1f, 1f);
-                audioSource[1].clip = audioClip[7];
-                audioSource[1].PlayDelayed(delay2);
+                    audioSource[5].volume = Random.Range(1f, 1.2f);
+                    audioSource[5].clip = audioClip[7];
+                    audioSource[5].PlayDelayed(delay2);
                 break;
             //AUDIO SOURCE 2 & 3 (ambience one shots)
             case "chasedAmbient":
@@ -240,6 +241,7 @@ public class PlayerStateTracker : MonoBehaviour
                     audioSource[3].PlayOneShot(audioClip[11]);
                 }
                 break;
+                //Pickup sound
             case "pickup":
                 audioSource[4].reverbZoneMix = Random.Range(1.2f, 1.3f);
                 audioSource[4].volume = Random.Range(0.05f, 0.08f);
@@ -247,10 +249,13 @@ public class PlayerStateTracker : MonoBehaviour
                 audioSource[4].PlayOneShot(audioClip[13]);
                 break;
             case "portalAmbience":
-                   /* audioSource[2].reverbZoneMix = Random.Range(0.4f, 0.45f);
-                    audioSource[2].volume = Random.Range(0.07f, 0.1f);
-                    audioSource[2].pitch = Random.Range(0.8f, 0.9f);
-                    audioSource[2].PlayOneShot(audioClip[12]);*/
+                //Need a distance method here, but no time to fix it rn. But it works at least.
+               /*if (!audioSource[6].isPlaying) { 
+                    audioSource[6].reverbZoneMix = Random.Range(0.4f, 0.45f);
+                    audioSource[6].volume = Random.Range(0.1f, 0.15f);
+                    audioSource[6].pitch = Random.Range(1f, 1.1f);
+                    audioSource[6].PlayOneShot(audioClip[12]);
+                }*/
                 break;
             default:
                 Debug.Log("Clip: "+clip+" was received, but nothing played");

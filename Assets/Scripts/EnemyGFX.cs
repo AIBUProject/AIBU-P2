@@ -5,25 +5,30 @@ using Pathfinding;
 
 public class EnemyGFX : MonoBehaviour
 {
-    public AIPath aIPath;
+    public AIPath aIPath; //how to find aiPath?
+    [SerializeField] private Animator anim;
 
     void Update()
     {
         if(aIPath.desiredVelocity.x >= 0.01f)//Moving right
         {
-            //do animator stuff
+            anim.SetTrigger("goSide");
+            transform.localScale = new Vector2(1, 1);
         }
         else if(aIPath.desiredVelocity.x <= -0.01f)//Moving left
         {
-            //do animator stuff
+            anim.SetTrigger("goSide");
+            transform.localScale = new Vector2(-1, 1);
         }
         else if(aIPath.desiredVelocity.y >= 0.01f)//Moving up
         {
-            //do animator stuff
+            anim.SetTrigger("goSide");
+            transform.localScale = new Vector2(1, 1);
         }
         else if(aIPath.desiredVelocity.y <= 0.01f)//Moving down
         {
-            //do animator stuff
+            anim.SetTrigger("goDown");
+            transform.localScale = new Vector2(1, 1);
         }
     }
 }

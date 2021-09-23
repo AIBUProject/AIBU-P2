@@ -233,25 +233,24 @@ public class PlayerStateTracker : MonoBehaviour
                 audioSource[2].PlayDelayed(delay);
                 break;
             case "openPortal":
-                    audioSource[2].reverbZoneMix = Random.Range(0.6f, 0.7f);
-                    audioSource[2].volume = Random.Range(0.5f, 0.6f);
-                    audioSource[2].pitch = Random.Range(0.8f, 0.9f);
-                    audioSource[2].PlayOneShot(audioClip[11]);
+                if (!audioSource[3].isPlaying) {
+                    audioSource[3].reverbZoneMix = Random.Range(0.6f, 0.7f);
+                    audioSource[3].volume = Random.Range(0.5f, 0.6f);
+                    audioSource[3].pitch = Random.Range(0.8f, 0.9f);
+                    audioSource[3].PlayOneShot(audioClip[11]);
+                }
                 break;
             case "pickup":
-                audioSource[0].reverbZoneMix = Random.Range(0.6f, 0.7f);
-                audioSource[0].volume = Random.Range(0.3f, 0.4f);
-                audioSource[0].pitch = Random.Range(0.6f, 0.7f);
+                audioSource[0].reverbZoneMix = Random.Range(1.2f, 1.3f);
+                audioSource[0].volume = Random.Range(0.05f, 0.08f);
+                audioSource[0].pitch = Random.Range(0.9f,1.2f);
                 audioSource[0].PlayOneShot(audioClip[13]);
                 break;
             case "portalAmbience":
-                if (!audioSource[2].isPlaying)
-                {
-                    audioSource[2].reverbZoneMix = Random.Range(0.3f, 0.34f);
-                    audioSource[2].volume = Random.Range(0.08f, 0.09f);
-                    audioSource[2].pitch = Random.Range(0.6f, 0.65f);
-                    audioSource[2].PlayOneShot(audioClip[12]);
-                }
+                   /* audioSource[2].reverbZoneMix = Random.Range(0.4f, 0.45f);
+                    audioSource[2].volume = Random.Range(0.07f, 0.1f);
+                    audioSource[2].pitch = Random.Range(0.8f, 0.9f);
+                    audioSource[2].PlayOneShot(audioClip[12]);*/
                 break;
             default:
                 Debug.Log("Clip: "+clip+" was received, but nothing played");

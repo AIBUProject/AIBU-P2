@@ -9,6 +9,7 @@ TagManager:
   - Rock
   - Mushroom
   - CollectibleCounter
+  - Exit
   layers:
   - Default
   - TransparentFX

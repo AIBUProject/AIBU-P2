@@ -41988,7 +41988,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 40038bcb60a801d42b88a4fd6cef0170, type: 3}
   - {fileID: 8300000, guid: 9b981185cb0a3ff439e3a689acd392aa, type: 3}
   - {fileID: 8300000, guid: 8077746116127dc499c637ed1add6ce4, type: 3}
-  - {fileID: 8300000, guid: d160d9494265e3b4996fe11b1cd1dd4b, type: 3}
+  - {fileID: 8300000, guid: 7a04555526033ae44baf48724384ef6d, type: 3}
+  - {fileID: 8300000, guid: b488b85d45ccbbd4f93a8db0271ddc6a, type: 3}
   player: {fileID: 921193151}
   volumeControls: {fileID: 306486854}
   lowestVol: 0.33
@@ -42001,6 +42002,7 @@ MonoBehaviour:
   playerIsAlive: 0
   isAlive: 0
   amountToWin: -1
+  collectedPickups: 0
 --- !u!114 &1610518037
 MonoBehaviour:
   m_ObjectHideFlags: 0

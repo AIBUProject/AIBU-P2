@@ -13,16 +13,16 @@ public class EnemyGFX : MonoBehaviour
         if(aIPath.desiredVelocity.x >= 0.01f)//Moving right
         {
             anim.SetTrigger("goSide");
-            transform.localScale = new Vector2(1, 1);
+            transform.localScale = new Vector2(-1, 1);
         }
         else if(aIPath.desiredVelocity.x <= -0.01f)//Moving left
         {
             anim.SetTrigger("goSide");
-            transform.localScale = new Vector2(-1, 1);
+            transform.localScale = new Vector2(1, 1);
         }
         else if(aIPath.desiredVelocity.y >= 0.01f)//Moving up
         {
-            anim.SetTrigger("goSide");
+            anim.SetTrigger("goUp");
             transform.localScale = new Vector2(1, 1);
         }
         else if(aIPath.desiredVelocity.y <= 0.01f)//Moving down

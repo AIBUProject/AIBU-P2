@@ -65,4 +65,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ForestGenerator/Forest1EmptyCross2.unity
     guid: d284cec46235fa84e958c0a1c10980f4
+  - enabled: 1
+    path: Assets/Scenes/ForestGenerator/Forest1EmptyCross3.unity
+    guid: 628f0489c7debbc46a00141189fd5c3e
   m_configObjects: {}

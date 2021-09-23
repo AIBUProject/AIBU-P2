@@ -10,7 +10,7 @@ public class AGrid : MonoBehaviour
 
     void Update()
     {
-      if(GameObject.Find("RoomController").GetComponentInChildren<RoomController>().spawnedEndRoom == true && doOnce == false){
+      if(GameObject.Find("RoomController").GetComponentInChildren<RoomController>().populatedRooms == true && doOnce == false){
             if (gridWait()) {
                 Instantiate(pathfinder, new Vector2(0, 0), Quaternion.identity);
 

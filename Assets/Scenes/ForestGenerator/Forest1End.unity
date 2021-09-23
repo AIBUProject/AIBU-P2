@@ -132,7 +132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 38721140}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Colliders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -379,7 +379,7 @@ GameObject:
   m_Component:
   - component: {fileID: 471622767}
   - component: {fileID: 471622768}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Coll1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -514,7 +514,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1704959961
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 6637d7035a13ab5428b481120add8552, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -537,7 +537,7 @@ GameObject:
   m_Component:
   - component: {fileID: 750953127}
   - component: {fileID: 750953128}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Coll2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -608,7 +608,7 @@ GameObject:
   m_Component:
   - component: {fileID: 995437157}
   - component: {fileID: 995437158}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Coll4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1480,7 +1480,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1945297926}
   - component: {fileID: 1945297927}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Coll3
   m_TagString: Untagged
   m_Icon: {fileID: 0}

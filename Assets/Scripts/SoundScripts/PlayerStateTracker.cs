@@ -31,24 +31,37 @@ public class PlayerStateTracker : MonoBehaviour
     private float delay;
     private float delay2;
     private bool volumeMenu = true;
+    private bool winConditionFound = false;
     private string tempState;
     private string currentState = "defaultState";
     public int amountToWin=-1;
+    public int collectedPickups=0;
+    private int tempCollectedPickups;
     private void Awake()
     {
-        
+
     }
     void Start()
     {
         audioSource = GetComponents<AudioSource>();
         PlaySound("defaultMusic");
         isAlive = true;
-        Invoke("FindCollectiblesSoon", 8);
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        if (!winConditionFound)
+        {
+            GameObject exitObj = GameObject.FindGameObjectWithTag("Exit");
+            if (exitObj!=null)
+            {
+                amountToWin = exitObj.GetComponent<WinCondition>().GetAmountToWin();
+                winConditionFound = true;
+            }
+        }
+        collectedPickups = player.gameObject.GetComponent<PlayerController>().getCollectedGameObject();
         if (Input.GetKeyDown(KeyCode.M))
         {
             //snapshotController.MuteAudio();
@@ -63,14 +76,8 @@ public class PlayerStateTracker : MonoBehaviour
         UpdateState();
         PlayOneShots();
         TrollCheck();
-
     }
-    private void FindCollectiblesSoon()
-    {
-        collectibles = GameObject.FindGameObjectsWithTag("Collectible");
-        amountToWin = collectibles.Length;
-        // Code to execute after the delay
-    }
+    
     //Does checks to determine what sounds to be playing every frame. From footsteps, to death sound, etc
     private void UpdateState()
     {
@@ -88,14 +95,23 @@ public class PlayerStateTracker : MonoBehaviour
         {
             PlaySound("moving");
         }
-        if (player.gameObject.GetComponent<PlayerController>().getCollectedGameObject() == amountToWin) {
+        if (player.gameObject.GetComponent<PlayerController>().getCollectedGameObject() == amountToWin)
+        {
             if (portalNotOpen)
             {
                 PlaySound("openPortal");
                 portalNotOpen = false;
             }
             PlaySound("portalAmbience");
-
+        }
+        if (collectedPickups<=amountToWin && collectedPickups != -1)
+        {
+            if (tempCollectedPickups != collectedPickups)
+            {
+                Debug.Log("PickupSound should play");
+                PlaySound("pickup");
+                tempCollectedPickups = collectedPickups;
+            }
         }
 
     }
@@ -222,6 +238,12 @@ public class PlayerStateTracker : MonoBehaviour
                     audioSource[2].pitch = Random.Range(0.8f, 0.9f);
                     audioSource[2].PlayOneShot(audioClip[11]);
                 break;
+            case "pickup":
+                audioSource[0].reverbZoneMix = Random.Range(0.6f, 0.7f);
+                audioSource[0].volume = Random.Range(0.3f, 0.4f);
+                audioSource[0].pitch = Random.Range(0.6f, 0.7f);
+                audioSource[0].PlayOneShot(audioClip[13]);
+                break;
             case "portalAmbience":
                 if (!audioSource[2].isPlaying)
                 {
@@ -231,7 +253,6 @@ public class PlayerStateTracker : MonoBehaviour
                     audioSource[2].PlayOneShot(audioClip[12]);
                 }
                 break;
-
             default:
                 Debug.Log("Clip: "+clip+" was received, but nothing played");
                 break;

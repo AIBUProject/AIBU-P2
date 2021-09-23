@@ -48,5 +48,9 @@ public class WinCondition : MonoBehaviour
         }
 
     }
+    public int GetAmountToWin()
+    {
+        return amountToWin;
+    }
 }
  

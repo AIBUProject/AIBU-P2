@@ -3920,7 +3920,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0.93
-  m_Text: "Filip Hallberg\nTim Ag\xE9lli\n"
+  m_Text: "Filip Hallberg\nTim Ag\xE9lii\n"
 --- !u!222 &1260565195
 CanvasRenderer:
   m_ObjectHideFlags: 0

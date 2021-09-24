@@ -116,7 +116,10 @@ public class FadeBlack : MonoBehaviour
     {
         loseCheck = b;
     }
-
+    public bool getLoseScreen()
+    {
+        return loseCheck;
+    }
     private bool reloadCountdown(float seconds)
     {
         //Debug.Log(seconds);

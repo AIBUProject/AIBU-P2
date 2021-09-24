@@ -77,11 +77,11 @@ public class PlayerStateTracker : MonoBehaviour
         PlayOneShots();
         TrollCheck();
     }
-    
+
     //Does checks to determine what sounds to be playing every frame. From footsteps, to death sound, etc
     private void UpdateState()
     {
-        if (GameObject.Find("Canvas").GetComponentInChildren<FadeBlack>().getDoEnd() == true && isAlive) {
+        if ((GameObject.Find("Canvas").GetComponentInChildren<FadeBlack>().getDoEnd() == true && isAlive) ||  (GameObject.Find("Canvas").GetComponentInChildren<FadeBlack>().getLoseScreen() == true && isAlive)) { 
         PlaySound("playerDied");
          PlaySound("trollChomp");
         snapshotController.SetDefaultMusicVolume();
